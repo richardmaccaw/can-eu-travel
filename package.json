@@ -5,9 +5,7 @@
      "scripts": {
           "dev": "vite",
           "build:css": "tailwindcss -i ./public/tailwind.css -o ./public/style.css --minify",
-          "build": "npm run build:css",
-          "dev:css": "tailwindcss -i ./public/tailwind.css -o ./public/style.css --watch",
-          "dev:server": "live-server --port=3000 --no-browser --watch=public --open=public"
+          "build": "npm run build:css"
      },
      "devDependencies": {
           "tailwindcss": "^3.3.5",
