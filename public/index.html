@@ -3,11 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World - Schengen Days Calculator</title>
+  <title>Schengen Days Calculator</title>
   <link href="style.css" rel="stylesheet">
 </head>
-<body>
-  <h1>Hello, World!</h1>
-  <p>Welcome to the Schengen Days Calculator.</p>
+<body class="bg-gray-50 min-h-screen font-sans text-gray-900">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="text-center mb-12">
+      <h1 class="text-3xl font-bold text-indigo-600 mb-2">Schengen Days Calculator</h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Drop your Google Maps Timeline export to instantly calculate your days in the Schengen Area. 
+        All processing happens in your browser - your data never leaves your device.
+      </p>
+    </header>
+
+    <!-- Drag and Drop Area -->
+    <div id="drop-zone" class="border-2 border-dashed border-indigo-300 rounded-lg p-12 text-center transition-all bg-white hover:bg-indigo-50 cursor-pointer mb-8">
+      <div class="max-w-xs mx-auto">
+        <!-- File Icon -->
+        <svg class="mx-auto h-16 w-16 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        
+        <p class="mt-4 text-lg font-medium text-indigo-600">Drop your file here</p>
+        <p class="mt-1 text-sm text-gray-500">Or click to browse</p>
+        
+        <p class="mt-4 text-sm text-gray-500">Supports .zip, .json, or .kml files from Google Takeout</p>
+        
+        <!-- Hidden file input -->
+        <input type="file" id="file-input" class="hidden" accept=".zip,.json,.kml">
+      </div>
+    </div>
+
+    <!-- Privacy Notice -->
+    <div class="text-center text-sm text-gray-500 mt-8">
+      <p class="flex items-center justify-center">
+        <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        Your data never leaves your browser. All processing happens locally.
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html> 
