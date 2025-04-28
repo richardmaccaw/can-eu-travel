@@ -5,6 +5,9 @@ node_modules/
 dist/
 build/
 
+# Generated CSS files
+public/style.css
+
 # System files
 .DS_Store
 

@@ -1,0 +1,12 @@
+{
+     "name": "schengen-calculator",
+     "version": "1.0.0",
+     "private": true,
+     "scripts": {
+          "build:css": "tailwindcss -i ./public/tailwind.css -o ./public/style.css --minify",
+          "build": "npm run build:css"
+     },
+     "devDependencies": {
+          "tailwindcss": "^3.3.5"
+     }
+}
