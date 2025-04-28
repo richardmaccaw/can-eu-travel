@@ -129,12 +129,13 @@ function createCalendarHeatmap(daysSet) {
         const cell = document.createElement('div');
         // Convert the date to UTC midnight timestamp for comparison
         const utcMidnight = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
-        const isPresent = daysSet.has(utcMidnight);
+        const country = daysSet.get(utcMidnight);
+        const isPresent = country !== undefined;
         
         cell.className = `w-4 h-4 rounded-sm ${
             isPresent ? 'bg-blue-500' : 'bg-gray-100'
         } transition-colors hover:border hover:border-gray-300`;
-        cell.title = `${formatDate(date)}: ${isPresent ? 'Present' : 'Not present'}`;
+        cell.title = `${formatDate(date)}: ${isPresent ? country : 'Not present'}`;
         
         grid.appendChild(cell);
     }

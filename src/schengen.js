@@ -39,13 +39,14 @@ export async function getSchengenCountry(lat, lon) {
 }
 
 export async function collectSchengenDays(visits) {
-  const days = new Set();
+  const days = new Map();
   for (const v of visits) {
-    if (!(await isSchengen(v.lat, v.lon))) continue;
+    const country = await getSchengenCountry(v.lat, v.lon);
+    if (!country) continue;
     
     // Add each day from start to end (inclusive)
     for (let t = msToUTCmidnight(v.startMs); t <= v.endMs; t += 86_400_000) {
-      days.add(t);
+      days.set(t, country.name);
     }
   }
   return days;

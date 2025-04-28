@@ -53,7 +53,7 @@ async function handleFile(file) {
     const jsonArray = JSON.parse(text);
     const visits = Array.from(timelineToFixes(jsonArray));
     const daysSet = await collectSchengenDays(visits);
-    const dayArray = [...daysSet].sort((a, b) => a - b);
+    const dayArray = [...daysSet.keys()].sort((a, b) => a - b);
     const todayMidn = msToUTCmidnight(Date.now());
     const stats = windowStats(dayArray, todayMidn);
     
