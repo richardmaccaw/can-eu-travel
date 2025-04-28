@@ -1,14 +1,18 @@
 {
     "type": "Feature",
     "properties": {
-      "name": "Schengen Area (sample, not accurate!)"
+      "name": "Europe (including UK, rough bounding box)"
     },
     "geometry": {
       "type": "MultiPolygon",
       "coordinates": [
         [
-          [ 
-            [ [ -10.0, 35.0 ], [ 30.0, 35.0 ], [ 30.0, 60.0 ], [ -10.0, 60.0 ], [ -10.0, 35.0 ] ]
+          [
+            [ -25.0, 34.0 ],
+            [ 40.0, 34.0 ],
+            [ 40.0, 72.0 ],
+            [ -25.0, 72.0 ],
+            [ -25.0, 34.0 ]
           ]
         ]
       ]
