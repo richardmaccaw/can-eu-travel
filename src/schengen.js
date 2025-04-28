@@ -5,7 +5,17 @@ import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 import { point, feature } from '@turf/helpers';
 import { msToUTCmidnight } from './utils.js';
 
+
 // You will need to implement or import loadSchengen
+let schengenCache = null;
+export async function loadSchengen() {
+  if (schengenCache) return schengenCache;
+  const resp = await fetch('schengen.geo.json');
+  if (!resp.ok) throw new Error('Failed to load Schengen borders');
+  schengenCache = await resp.json();
+  return schengenCache;
+}
+
 export async function isSchengen(lat, lon) {
   const poly = feature((await loadSchengen()).geometry);
   return booleanPointInPolygon(point([lon, lat]), poly);
