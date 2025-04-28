@@ -127,7 +127,9 @@ function createCalendarHeatmap(daysSet) {
         const date = new Date(startDate);
         date.setDate(date.getDate() + i);
         const cell = document.createElement('div');
-        const isPresent = daysSet.has(date.getTime());
+        // Convert the date to UTC midnight timestamp for comparison
+        const utcMidnight = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+        const isPresent = daysSet.has(utcMidnight);
         
         cell.className = `w-4 h-4 rounded-sm ${
             isPresent ? 'bg-blue-500' : 'bg-gray-100'
