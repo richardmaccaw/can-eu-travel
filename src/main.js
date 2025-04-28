@@ -1,5 +1,9 @@
 // main.js
 
+import { timelineToFixes } from './fileHandler.js';
+import { collectSchengenDays, windowStats } from './schengen.js';
+import { msToUTCmidnight } from './utils.js';
+
 // Setup drag-and-drop and file input logic
 function setupDropZone() {
   const dropZone = document.getElementById('drop-zone');
@@ -42,10 +46,20 @@ function setupDropZone() {
 }
 
 // Function to handle the uploaded file
-function handleFile(file) {
-  console.log('File received:', file.name);
-  // TODO: Add file processing logic here
-  alert(`File received: ${file.name}\nProcessing will be implemented in the next step.`);
+async function handleFile(file) {
+  try {
+    const text = await file.text();
+    const jsonArray = JSON.parse(text);
+    const visits = Array.from(timelineToFixes(jsonArray));
+    const daysSet = await collectSchengenDays(visits);
+    const dayArray = [...daysSet].sort((a, b) => a - b);
+    const todayMidn = msToUTCmidnight(Date.now());
+    const stats = windowStats(dayArray, todayMidn);
+    alert(`Schengen stats:\nUsed: ${stats.used} days\nLeft: ${stats.left} days`);
+    // TODO: Render results in the UI instead of alert
+  } catch (err) {
+    alert('Error reading file: ' + err.message);
+  }
 }
 
 // Initialize on DOMContentLoaded
