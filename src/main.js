@@ -3,6 +3,7 @@
 import { timelineToFixes } from './fileHandler.js';
 import { collectSchengenDays, windowStats } from './schengen.js';
 import { msToUTCmidnight } from './utils.js';
+import { createResultsDisplay, showAlert } from './ui.js';
 
 // Setup drag-and-drop and file input logic
 function setupDropZone() {
@@ -55,10 +56,14 @@ async function handleFile(file) {
     const dayArray = [...daysSet].sort((a, b) => a - b);
     const todayMidn = msToUTCmidnight(Date.now());
     const stats = windowStats(dayArray, todayMidn);
-    alert(`Schengen stats:\nUsed: ${stats.used} days\nLeft: ${stats.left} days`);
-    // TODO: Render results in the UI instead of alert
+    
+    // Hide the drop zone
+    document.getElementById('drop-zone').style.display = 'none';
+    
+    // Show the results
+    createResultsDisplay(stats, daysSet);
   } catch (err) {
-    alert('Error reading file: ' + err.message);
+    showAlert('Error reading file: ' + err.message);
   }
 }
 
