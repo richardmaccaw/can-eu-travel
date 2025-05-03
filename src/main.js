@@ -1,5 +1,5 @@
 // main.js
-
+import './tailwind.css';
 import { timelineToFixes } from './fileHandler.js';
 import { collectSchengenDays, windowStats } from './schengen.js';
 import { msToUTCmidnight } from './utils.js';
