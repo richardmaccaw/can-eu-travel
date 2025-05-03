@@ -9,14 +9,26 @@ export const sampleStats = {
 };
 
 // 2. Sample daysSet Map (UTC midnight ms -> country name)
-// We'll mark 66 random days in the last 180 as 'France' for demo
+// We'll mark a few random week-long or weekend trips to different Schengen countries for demo
 export const sampleDaysSet = new Map();
 const today = new Date();
 const start = new Date(today);
 start.setDate(start.getDate() - 180);
-for (let i = 0; i < 66; i++) {
-  const d = new Date(start);
-  d.setDate(d.getDate() + i * 2 + 1); // every other day
-  const utcMid = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-  sampleDaysSet.set(utcMid, 'France');
-} 
+
+// Helper to add a trip
+function addTrip(startOffset, length, country) {
+  for (let i = 0; i < length; i++) {
+    const d = new Date(start);
+    d.setDate(d.getDate() + startOffset + i);
+    const utcMid = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+    sampleDaysSet.set(utcMid, country);
+  }
+}
+
+// Simulate a few trips
+addTrip(5, 7, 'France');      // 1 week in France
+addTrip(30, 3, 'Germany');    // long weekend in Germany
+addTrip(60, 8, 'Italy');      // 8 days in Italy
+addTrip(100, 2, 'Spain');     // quick weekend in Spain
+addTrip(140, 5, 'Netherlands'); // 5 days in Netherlands
+addTrip(170, 4, 'Austria');   // 4 days in Austria 
