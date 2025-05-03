@@ -46,7 +46,7 @@ export async function collectSchengenDays(visits) {
     
     // Add each day from start to end (inclusive)
     for (let t = msToUTCmidnight(v.startMs); t <= v.endMs; t += 86_400_000) {
-      days.set(t, country.name);
+      days.set(t, country);
     }
   }
   return days;

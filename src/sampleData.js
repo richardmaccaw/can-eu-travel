@@ -15,13 +15,22 @@ const today = new Date();
 const start = new Date(today);
 start.setDate(start.getDate() - 180);
 
-// Helper to add a trip
+// Minimal country data for demo (name + emoji)
+const countryData = {
+  'France': { name: 'France', emoji: '🇫🇷' },
+  'Germany': { name: 'Germany', emoji: '🇩🇪' },
+  'Italy': { name: 'Italy', emoji: '🇮🇹' },
+  'Spain': { name: 'Spain', emoji: '🇪🇸' },
+  'Netherlands': { name: 'Netherlands', emoji: '🇳🇱' },
+  'Austria': { name: 'Austria', emoji: '🇦🇹' }
+};
+
 function addTrip(startOffset, length, country) {
   for (let i = 0; i < length; i++) {
     const d = new Date(start);
     d.setDate(d.getDate() + startOffset + i);
     const utcMid = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-    sampleDaysSet.set(utcMid, country);
+    sampleDaysSet.set(utcMid, countryData[country]);
   }
 }
 

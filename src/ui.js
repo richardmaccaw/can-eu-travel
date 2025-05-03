@@ -78,6 +78,44 @@ export function createResultsDisplay(stats, daysSet, isSample = false) {
     resultsContainer.appendChild(card);
 }
 
+// --- Custom Tooltip Implementation ---
+function ensureTooltipDiv() {
+    let tooltip = document.getElementById('calendar-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'calendar-tooltip';
+        tooltip.style.position = 'fixed';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.zIndex = '9999';
+        tooltip.style.background = 'rgba(30,41,59,0.95)'; // slate-800
+        tooltip.style.color = 'white';
+        tooltip.style.padding = '6px 12px';
+        tooltip.style.borderRadius = '6px';
+        tooltip.style.fontSize = '13px';
+        tooltip.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+        tooltip.style.transition = 'opacity 0.1s';
+        tooltip.style.opacity = '0';
+        document.body.appendChild(tooltip);
+    }
+    return tooltip;
+}
+
+function showTooltip(text, x, y) {
+    const tooltip = ensureTooltipDiv();
+    tooltip.textContent = text;
+    tooltip.style.left = (x + 12) + 'px';
+    tooltip.style.top = (y + 12) + 'px';
+    tooltip.style.opacity = '1';
+}
+
+function hideTooltip() {
+    const tooltip = document.getElementById('calendar-tooltip');
+    if (tooltip) {
+        tooltip.style.opacity = '0';
+    }
+}
+// --- End Custom Tooltip Implementation ---
+
 function createCalendarHeatmap(daysSet) {
     const calendar = document.createElement('div');
     calendar.className = 'mt-6 bg-white rounded-lg p-4 flex flex-col';
@@ -167,15 +205,36 @@ function createCalendarHeatmap(daysSet) {
 
         weekArr.forEach(date => {
             const cell = document.createElement('div');
-            cell.className = 'w-4 h-4 rounded-sm transition-colors hover:border hover:border-gray-300';
+            cell.className = 'w-4 h-4 rounded-sm transition-colors hover:border hover:border-gray-300 flex items-center justify-center';
+            let tooltipText = '';
             if (date) {
                 const utcMidnight = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
                 const country = daysSet.get(utcMidnight);
                 const isPresent = country !== undefined;
-                cell.classList.add(isPresent ? 'bg-blue-500' : 'bg-gray-100');
-                cell.title = `${formatDate(date)}: ${isPresent ? country : 'Not present'}`;
+                if (isPresent && country.emoji) {
+                    cell.textContent = country.emoji;
+                    tooltipText = `${formatDate(date)}: ${country.name}`;
+                    cell.style.cursor = 'pointer';
+                } else if (isPresent) {
+                    cell.classList.add('bg-blue-500');
+                    tooltipText = `${formatDate(date)}: ${country.name}`;
+                    cell.style.cursor = 'pointer';
+                } else {
+                    cell.classList.add('bg-gray-100');
+                    tooltipText = '';
+                }
             } else {
                 cell.classList.add('bg-transparent');
+            }
+            // Custom tooltip events
+            if (tooltipText) {
+                cell.addEventListener('mouseenter', e => {
+                    showTooltip(tooltipText, e.clientX, e.clientY);
+                });
+                cell.addEventListener('mousemove', e => {
+                    showTooltip(tooltipText, e.clientX, e.clientY);
+                });
+                cell.addEventListener('mouseleave', hideTooltip);
             }
             weekCol.appendChild(cell);
         });

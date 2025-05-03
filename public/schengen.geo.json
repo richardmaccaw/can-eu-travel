@@ -6,7 +6,8 @@
       "properties": {
         "name": "Austria",
         "iso": "AUT",
-        "schengenEntry": "1997-12-01"
+        "schengenEntry": "1997-12-01",
+        "emoji": "🇦🇹"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -63,7 +64,8 @@
       "properties": {
         "name": "Belgium",
         "iso": "BEL",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇧🇪"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -148,7 +150,8 @@
       "properties": {
         "name": "Czech Republic",
         "iso": "CZE",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇨🇿"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -209,7 +212,8 @@
       "properties": {
         "name": "Denmark",
         "iso": "DNK",
-        "schengenEntry": "2001-03-25"
+        "schengenEntry": "2001-03-25",
+        "emoji": "🇩🇰"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -266,7 +270,8 @@
       "properties": {
         "name": "Estonia",
         "iso": "EST",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇪🇪"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -319,7 +324,8 @@
       "properties": {
         "name": "Finland",
         "iso": "FIN",
-        "schengenEntry": "2001-03-25"
+        "schengenEntry": "2001-03-25",
+        "emoji": "🇫🇮"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -460,7 +466,8 @@
       "properties": {
         "name": "France",
         "iso": "FRA",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇫🇷"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -741,7 +748,8 @@
       "properties": {
         "name": "Germany",
         "iso": "DEU",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇩🇪"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -942,7 +950,8 @@
       "properties": {
         "name": "Greece",
         "iso": "GRC",
-        "schengenEntry": "2000-01-01"
+        "schengenEntry": "2000-01-01",
+        "emoji": "🇬🇷"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1143,7 +1152,8 @@
       "properties": {
         "name": "Hungary",
         "iso": "HUN",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇭🇺"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1224,7 +1234,8 @@
       "properties": {
         "name": "Iceland",
         "iso": "ISL",
-        "schengenEntry": "2001-03-25"
+        "schengenEntry": "2001-03-25",
+        "emoji": "🇮🇸"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1301,7 +1312,8 @@
       "properties": {
         "name": "Italy",
         "iso": "ITA",
-        "schengenEntry": "1997-10-26"
+        "schengenEntry": "1997-10-26",
+        "emoji": "🇮🇹"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2901,66 +2913,6 @@
           [
             [
               [
-                10.395117187500006,
-                42.858154296875
-              ],
-              [
-                10.428320312500006,
-                42.819189453125
-              ],
-              [
-                10.432226562500006,
-                42.79658203125
-              ],
-              [
-                10.409960937500017,
-                42.77099609375
-              ],
-              [
-                10.419335937500023,
-                42.713183593749996
-              ],
-              [
-                10.335644531250011,
-                42.761132812499994
-              ],
-              [
-                10.208984375,
-                42.7369140625
-              ],
-              [
-                10.13125,
-                42.742041015625
-              ],
-              [
-                10.109765625000023,
-                42.785058593749994
-              ],
-              [
-                10.127539062500006,
-                42.810302734375
-              ],
-              [
-                10.248242187500011,
-                42.815771484375
-              ],
-              [
-                10.285742187500006,
-                42.828076171875
-              ],
-              [
-                10.358984375,
-                42.822314453124996
-              ],
-              [
-                10.395117187500006,
-                42.858154296875
-              ]
-            ]
-          ],
-          [
-            [
-              [
                 13.938281250000017,
                 40.705615234374996
               ],
@@ -3806,7 +3758,8 @@
       "properties": {
         "name": "Latvia",
         "iso": "LVA",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇱🇻"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3863,7 +3816,8 @@
       "properties": {
         "name": "Liechtenstein",
         "iso": "LIE",
-        "schengenEntry": "2011-12-19"
+        "schengenEntry": "2011-12-19",
+        "emoji": "🇱🇮"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3896,7 +3850,8 @@
       "properties": {
         "name": "Lithuania",
         "iso": "LTU",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇱🇹"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3953,7 +3908,8 @@
       "properties": {
         "name": "Luxembourg",
         "iso": "LUX",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇱🇺"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3990,7 +3946,8 @@
       "properties": {
         "name": "Malta",
         "iso": "MLT",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇲🇹"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -4027,7 +3984,8 @@
       "properties": {
         "name": "Netherlands",
         "iso": "NLD",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇳🇱"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -4104,7 +4062,8 @@
       "properties": {
         "name": "Norway",
         "iso": "NOR",
-        "schengenEntry": "2001-03-25"
+        "schengenEntry": "2001-03-25",
+        "emoji": "🇳🇴"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12185,7 +12144,8 @@
       "properties": {
         "name": "Poland",
         "iso": "POL",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇵🇱"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12254,7 +12214,8 @@
       "properties": {
         "name": "Portugal",
         "iso": "PRT",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇵🇹"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12323,7 +12284,8 @@
       "properties": {
         "name": "Slovakia",
         "iso": "SVK",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇸🇰"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12400,7 +12362,8 @@
       "properties": {
         "name": "Slovenia",
         "iso": "SVN",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇸🇮"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12437,7 +12400,8 @@
       "properties": {
         "name": "Spain",
         "iso": "ESP",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇪🇸"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12566,7 +12530,8 @@
       "properties": {
         "name": "Sweden",
         "iso": "SWE",
-        "schengenEntry": "2001-03-25"
+        "schengenEntry": "2001-03-25",
+        "emoji": "🇸🇪"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -12611,7 +12576,8 @@
       "properties": {
         "name": "Switzerland",
         "iso": "CHE",
-        "schengenEntry": "2008-12-12"
+        "schengenEntry": "2008-12-12",
+        "emoji": "🇨🇭"
       },
       "geometry": {
         "type": "Polygon",
