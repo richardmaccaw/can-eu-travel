@@ -249,9 +249,13 @@ function createCalendarHeatmap(daysSet) {
     gridRow.appendChild(weekdayCol);
     gridRow.appendChild(grid);
 
-    calendar.appendChild(monthsContainer);
-    calendar.appendChild(gridRow);
-    return calendar;
+    const scrollWrapper = document.createElement('div');
+scrollWrapper.className = 'overflow-x-auto w-full pb-2';
+scrollWrapper.appendChild(monthsContainer);
+scrollWrapper.appendChild(gridRow);
+
+calendar.appendChild(scrollWrapper);
+return calendar;
 }
 
 export function showAlert(message, type = 'error') {
