@@ -3,79 +3,92 @@
 
 import { formatDate } from './utils.js';
 
-export function createResultsDisplay(stats, daysSet) {
+export function createResultsDisplay(stats, daysSet, isSample = false) {
     const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = ''; // Clear existing content
-    
-    // Create main card
+    resultsContainer.innerHTML = '';
+
+    // Main card with more space, shadow, and rounded corners
     const card = document.createElement('div');
-    card.className = 'bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto';
-    
-    // Remaining days (big number)
+    card.className = 'relative bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto flex flex-col gap-8';
+
+    // Dummy data badge (floating, soft yellow, subtle shadow)
+    if (isSample) {
+        const badge = document.createElement('div');
+        badge.className = 'absolute top-4 right-4 z-10';
+        badge.innerHTML = `<span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full shadow border border-yellow-200 select-none">dummy data</span>`;
+        card.appendChild(badge);
+    }
+
+    // Days Remaining (big number, clear label)
     const remainingDays = document.createElement('div');
-    remainingDays.className = 'text-center mb-6';
+    remainingDays.className = 'flex flex-col items-center gap-2';
     const daysNumber = document.createElement('div');
-    daysNumber.className = `text-6xl font-bold mb-2 ${stats.left < 0 ? 'text-red-600' : 'text-green-600'}`;
+    daysNumber.className = `text-7xl font-extrabold tracking-tight ${stats.left < 0 ? 'text-red-600' : 'text-indigo-600'}`;
     daysNumber.textContent = stats.left;
     const daysLabel = document.createElement('div');
-    daysLabel.className = 'text-gray-600';
+    daysLabel.className = 'uppercase text-xs tracking-wider text-gray-500 font-semibold';
     daysLabel.textContent = 'Days Remaining';
     remainingDays.appendChild(daysNumber);
     remainingDays.appendChild(daysLabel);
-    
-    // Window information
+
+    // Window information (dates)
     const windowInfo = document.createElement('div');
-    windowInfo.className = 'grid grid-cols-2 gap-4 mb-6 text-center';
-    
+    windowInfo.className = 'flex flex-col sm:flex-row justify-center gap-4 bg-indigo-50 rounded-lg px-6 py-4';
+
     const startDate = document.createElement('div');
+    startDate.className = 'flex-1 text-center';
     startDate.innerHTML = `
-        <div class="text-gray-600 text-sm">Window Start</div>
-        <div class="font-semibold">${formatDate(new Date(stats.windowStart))}</div>
+        <div class="text-gray-500 text-xs mb-1">Window Start</div>
+        <div class="font-semibold text-lg text-gray-800">${formatDate(new Date(stats.windowStart))}</div>
     `;
-    
+
     const endDate = document.createElement('div');
+    endDate.className = 'flex-1 text-center';
     endDate.innerHTML = `
-        <div class="text-gray-600 text-sm">Window End</div>
-        <div class="font-semibold">${formatDate(new Date(Date.now()))}</div>
+        <div class="text-gray-500 text-xs mb-1">Window End</div>
+        <div class="font-semibold text-lg text-gray-800">${formatDate(new Date(Date.now()))}</div>
     `;
-    
+
     windowInfo.appendChild(startDate);
     windowInfo.appendChild(endDate);
-    
+
     // Calendar heat map
     const calendar = createCalendarHeatmap(daysSet);
-    
-    // Overstay alert if necessary
+
+    // Overstay alert (if needed)
     if (stats.left < 0) {
         const alert = document.createElement('div');
-        alert.className = 'bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-6';
+        alert.className = 'flex items-center gap-3 bg-red-50 border-l-4 border-red-400 text-red-700 px-4 py-3 rounded-lg shadow-sm mt-2';
         alert.innerHTML = `
-            <p class="font-bold">Warning: Overstay Risk</p>
-            <p>You have exceeded the 90-day limit by ${Math.abs(stats.left)} days.</p>
+            <svg class="w-5 h-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12A9 9 0 1 1 3 12a9 9 0 0 1 18 0z"/></svg>
+            <div>
+              <div class="font-bold">Warning: Overstay Risk</div>
+              <div>You have exceeded the 90-day limit by <span class="font-semibold">${Math.abs(stats.left)}</span> days.</div>
+            </div>
         `;
         card.appendChild(alert);
     }
-    
-    // Usage summary
+
+    // Usage summary (days used/available)
     const summary = document.createElement('div');
-    summary.className = 'grid grid-cols-2 gap-4 text-center bg-gray-50 rounded-lg p-4 mt-6';
+    summary.className = 'flex flex-col sm:flex-row justify-center gap-4 bg-gray-50 rounded-lg px-6 py-4';
     summary.innerHTML = `
-        <div>
-            <div class="text-gray-600 text-sm">Days Used</div>
-            <div class="font-semibold text-xl">${stats.used}</div>
+        <div class="flex-1 text-center">
+            <div class="text-gray-500 text-xs mb-1">Days Used</div>
+            <div class="font-semibold text-xl text-gray-800">${stats.used}</div>
         </div>
-        <div>
-            <div class="text-gray-600 text-sm">Days Available</div>
-            <div class="font-semibold text-xl">90</div>
+        <div class="flex-1 text-center">
+            <div class="text-gray-500 text-xs mb-1">Days Available</div>
+            <div class="font-semibold text-xl text-gray-800">90</div>
         </div>
     `;
-    
-    // Assemble all components
+
+    // Assemble all components in order
     card.appendChild(remainingDays);
     card.appendChild(windowInfo);
     card.appendChild(calendar);
     card.appendChild(summary);
-    
+
     resultsContainer.appendChild(card);
 }
 

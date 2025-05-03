@@ -67,25 +67,21 @@ async function handleFile(file) {
     document.getElementById('drop-zone').style.display = 'none';
     
     // Show the results
-    createResultsDisplay(stats, daysSet);
+    createResultsDisplay(stats, daysSet, false);
   } catch (err) {
     showAlert('Error reading file: ' + err.message);
   }
 }
 
-// Show sample results with a banner
+// Show sample results with a badge in the results card
 function showSampleResults() {
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = '';
-  const banner = document.createElement('div');
-  banner.className = 'bg-blue-100 text-blue-800 px-3 py-1 rounded mb-2 text-sm inline-block';
-  banner.id = 'sample-banner';
-  banner.textContent = 'Sample data — drop your Google Timeline export above to see your own results!';
-  resultsContainer.appendChild(banner);
-  createResultsDisplay(sampleStats, sampleDaysSet);
+  createResultsDisplay(sampleStats, sampleDaysSet, true);
 }
 
 function hideSampleBanner() {
+  // No longer needed, but kept for compatibility if called
   const banner = document.getElementById('sample-banner');
   if (banner) banner.remove();
 }
