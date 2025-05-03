@@ -4,11 +4,15 @@ import { timelineToFixes } from './fileHandler.js';
 import { collectSchengenDays, windowStats } from './schengen.js';
 import { msToUTCmidnight } from './utils.js';
 import { createResultsDisplay, showAlert } from './ui.js';
+import { sampleStats, sampleDaysSet } from './sampleData.js';
 
 // Setup drag-and-drop and file input logic
 function setupDropZone() {
   const dropZone = document.getElementById('drop-zone');
   const fileInput = document.getElementById('file-input');
+
+  // Show sample results on first load
+  showSampleResults();
 
   // Trigger file input when drop zone is clicked
   dropZone.addEventListener('click', () => {
@@ -49,6 +53,8 @@ function setupDropZone() {
 // Function to handle the uploaded file
 async function handleFile(file) {
   try {
+    // Hide sample results if present
+    hideSampleBanner();
     const text = await file.text();
     const jsonArray = JSON.parse(text);
     const visits = Array.from(timelineToFixes(jsonArray));
@@ -65,6 +71,23 @@ async function handleFile(file) {
   } catch (err) {
     showAlert('Error reading file: ' + err.message);
   }
+}
+
+// Show sample results with a banner
+function showSampleResults() {
+  const resultsContainer = document.getElementById('results');
+  resultsContainer.innerHTML = '';
+  const banner = document.createElement('div');
+  banner.className = 'bg-blue-100 text-blue-800 px-3 py-1 rounded mb-2 text-sm inline-block';
+  banner.id = 'sample-banner';
+  banner.textContent = 'Sample data — drop your Google Timeline export above to see your own results!';
+  resultsContainer.appendChild(banner);
+  createResultsDisplay(sampleStats, sampleDaysSet);
+}
+
+function hideSampleBanner() {
+  const banner = document.getElementById('sample-banner');
+  if (banner) banner.remove();
 }
 
 // Initialize on DOMContentLoaded
