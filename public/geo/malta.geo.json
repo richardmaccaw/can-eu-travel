@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Malta",
+        "iso": "MLT",
+        "schengenEntry": "2007-12-21"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                14.376485,
+                35.767559
+              ],
+              [
+                14.576485,
+                35.867559
+              ],
+              [
+                14.376485,
+                35.967559
+              ],
+              [
+                14.176485,
+                35.867559
+              ],
+              [
+                14.376485,
+                35.767559
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Slovenia",
+        "iso": "SVN",
+        "schengenEntry": "2007-12-21"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                13.80682,
+                46.509306
+              ],
+              [
+                14.790252,
+                46.431817
+              ],
+              [
+                16.046312,
+                46.683611
+              ],
+              [
+                16.979667,
+                48.123497
+              ],
+              [
+                13.80682,
+                46.509306
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

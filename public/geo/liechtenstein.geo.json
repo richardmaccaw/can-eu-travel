@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Liechtenstein",
+        "iso": "LIE",
+        "schengenEntry": "2011-12-19"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                9.480544,
+                47.580694
+              ],
+              [
+                9.566168,
+                47.540453
+              ],
+              [
+                9.480544,
+                47.480694
+              ],
+              [
+                9.480544,
+                47.580694
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
