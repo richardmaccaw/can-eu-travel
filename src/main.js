@@ -30,14 +30,14 @@ function setupDropZone() {
   ['dragenter', 'dragover'].forEach(eventName => {
     dropZone.addEventListener(eventName, (e) => {
       e.preventDefault();
-      dropZone.classList.add('border-indigo-500', 'bg-indigo-50');
+      dropZone.classList.add('border-blue-500', 'bg-blue-50');
     });
   });
 
   ['dragleave', 'drop'].forEach(eventName => {
     dropZone.addEventListener(eventName, (e) => {
       e.preventDefault();
-      dropZone.classList.remove('border-indigo-500', 'bg-indigo-50');
+      dropZone.classList.remove('border-blue-500', 'bg-blue-50');
     });
   });
 
@@ -55,6 +55,7 @@ async function handleFile(file) {
   try {
     // Hide sample results if present
     hideSampleBanner();
+
     const text = await file.text();
     const jsonArray = JSON.parse(text);
     const visits = Array.from(timelineToFixes(jsonArray));

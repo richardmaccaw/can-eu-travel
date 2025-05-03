@@ -6,7 +6,8 @@
       "properties": {
         "name": "Switzerland",
         "iso": "CHE",
-        "schengenEntry": "2008-12-12"
+        "schengenEntry": "2008-12-12",
+        "emoji": "🇨🇭"
       },
       "geometry": {
         "type": "Polygon",

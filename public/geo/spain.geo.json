@@ -6,7 +6,8 @@
       "properties": {
         "name": "Spain",
         "iso": "ESP",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇪🇸"
       },
       "geometry": {
         "type": "MultiPolygon",

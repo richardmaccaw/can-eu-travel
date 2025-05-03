@@ -6,7 +6,8 @@
       "properties": {
         "name": "Netherlands",
         "iso": "NLD",
-        "schengenEntry": "1995-03-26"
+        "schengenEntry": "1995-03-26",
+        "emoji": "🇳🇱"
       },
       "geometry": {
         "type": "MultiPolygon",

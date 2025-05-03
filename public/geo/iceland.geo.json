@@ -6,7 +6,8 @@
       "properties": {
         "name": "Iceland",
         "iso": "ISL",
-        "schengenEntry": "2001-03-25"
+        "schengenEntry": "2001-03-25",
+        "emoji": "🇮🇸"
       },
       "geometry": {
         "type": "MultiPolygon",

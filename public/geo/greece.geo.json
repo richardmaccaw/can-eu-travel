@@ -6,7 +6,8 @@
       "properties": {
         "name": "Greece",
         "iso": "GRC",
-        "schengenEntry": "2000-01-01"
+        "schengenEntry": "2000-01-01",
+        "emoji": "🇬🇷"
       },
       "geometry": {
         "type": "MultiPolygon",

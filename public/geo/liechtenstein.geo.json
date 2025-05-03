@@ -6,7 +6,8 @@
       "properties": {
         "name": "Liechtenstein",
         "iso": "LIE",
-        "schengenEntry": "2011-12-19"
+        "schengenEntry": "2011-12-19",
+        "emoji": "🇱🇮"
       },
       "geometry": {
         "type": "MultiPolygon",

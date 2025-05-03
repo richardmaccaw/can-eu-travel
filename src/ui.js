@@ -23,7 +23,7 @@ export function createResultsDisplay(stats, daysSet, isSample = false) {
     const remainingDays = document.createElement('div');
     remainingDays.className = 'flex flex-col items-center gap-2';
     const daysNumber = document.createElement('div');
-    daysNumber.className = `text-7xl font-extrabold tracking-tight ${stats.left < 0 ? 'text-red-600' : 'text-indigo-600'}`;
+    daysNumber.className = `text-7xl font-extrabold tracking-tight ${stats.left < 0 ? 'text-red-600' : 'text-blue-600'}`;
     daysNumber.textContent = stats.left;
     const daysLabel = document.createElement('div');
     daysLabel.className = 'uppercase text-xs tracking-wider text-gray-500 font-semibold';
@@ -33,7 +33,7 @@ export function createResultsDisplay(stats, daysSet, isSample = false) {
 
     // Window information (dates)
     const windowInfo = document.createElement('div');
-    windowInfo.className = 'flex flex-col sm:flex-row justify-center gap-4 bg-indigo-50 rounded-lg px-6 py-4';
+    windowInfo.className = 'flex flex-col sm:flex-row justify-center gap-4 bg-blue-50 rounded-lg px-6 py-4';
 
     const startDate = document.createElement('div');
     startDate.className = 'flex-1 text-center';
@@ -54,20 +54,6 @@ export function createResultsDisplay(stats, daysSet, isSample = false) {
 
     // Calendar heat map
     const calendar = createCalendarHeatmap(daysSet);
-
-    // Overstay alert (if needed)
-    if (stats.left < 0) {
-        const alert = document.createElement('div');
-        alert.className = 'flex items-center gap-3 bg-red-50 border-l-4 border-red-400 text-red-700 px-4 py-3 rounded-lg shadow-sm mt-2';
-        alert.innerHTML = `
-            <svg class="w-5 h-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12A9 9 0 1 1 3 12a9 9 0 0 1 18 0z"/></svg>
-            <div>
-              <div class="font-bold">Warning: Overstay Risk</div>
-              <div>You have exceeded the 90-day limit by <span class="font-semibold">${Math.abs(stats.left)}</span> days.</div>
-            </div>
-        `;
-        card.appendChild(alert);
-    }
 
     // Usage summary (days used/available)
     const summary = document.createElement('div');

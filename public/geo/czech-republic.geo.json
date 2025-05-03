@@ -6,7 +6,8 @@
       "properties": {
         "name": "Czech Republic",
         "iso": "CZE",
-        "schengenEntry": "2007-12-21"
+        "schengenEntry": "2007-12-21",
+        "emoji": "🇨🇿"
       },
       "geometry": {
         "type": "MultiPolygon",
