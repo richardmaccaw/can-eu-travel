@@ -1,11 +1,3 @@
-// fileHandler.js
-// Functions for parsing Google Timeline exports, extracting visits, etc.
-
-export function parseFile(file) {
-  // Placeholder for file parsing logic
-  console.log('Parsing file:', file.name);
-}
-
 export function parseLatLon(geoString) {
   const [lat, lon] = geoString.replace('geo:', '').split(',').map(Number);
   return [lat, lon];
