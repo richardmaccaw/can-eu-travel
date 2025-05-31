@@ -1,23 +1,32 @@
 {
-     "name": "schengen-calculator",
-     "version": "1.0.0",
-     "private": true,
-     "scripts": {
-          "dev": "vite",
-          "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/style.css --minify",
-          "build:vite": "vite build",
-          "build:geojson": "node scripts/combine-geojson.js",
-          "build": "npm run build:vite && npm run build:css && npm run build:geojson"
-     },
-     "devDependencies": {
-          "@turf/turf": "^7.2.0",
-          "autoprefixer": "^10.4.21",
-          "postcss": "^8.5.3",
-          "tailwindcss": "^3.3.5",
-          "vite": "^6.3.3"
-     },
-     "dependencies": {
-          "@turf/boolean-point-in-polygon": "^7.2.0",
-          "@turf/projection": "^7.2.0"
-     }
+  "name": "schengen-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/style.css --minify",
+    "build:vite": "vite build",
+    "build:geojson": "node scripts/combine-geojson.js",
+    "build": "npm run build:vite && npm run build:css && npm run build:geojson"
+  },
+  "devDependencies": {
+    "@turf/turf": "^7.2.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.3.5",
+    "vite": "^6.3.3",
+    "@tailwindcss/typography": "^0.5.10",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.294.0",
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "dependencies": {
+    "@turf/boolean-point-in-polygon": "^7.2.0",
+    "@turf/projection": "^7.2.0",
+    "tailwind-merge": "^2.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0"
+  }
 }
