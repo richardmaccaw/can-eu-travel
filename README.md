@@ -5,12 +5,16 @@ This is a minimal React + TypeScript implementation of the original Schengen day
 ## Development
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Build
 
 ```bash
-npm run build
+pnpm run build
 ```
+
+During the build step all GeoJSON files located in `public/geo` are automatically
+merged into `public/schengen.geo.json` so updated boundaries are reflected on
+deployment.
