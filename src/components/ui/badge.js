@@ -22,7 +22,6 @@ function Badge({
         className
       )}
       {...props} />)
-      );
   )
 }
 
