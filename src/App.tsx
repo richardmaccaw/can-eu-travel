@@ -93,33 +93,42 @@ function App() {
 
       <Story />
 
-      <Button ref={importButtonRef} className="mt-10" onClick={handleUploadClick}>
-        Import
-      </Button>
+      <div className="flex flex-col items-center gap-2">
+        <Button
+          ref={importButtonRef}
+          className="mt-10 w-auto pointer-events-auto"
+          onClick={handleUploadClick}
+        >
+          Import
+        </Button>
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="link" className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100">
-            Show me how
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>How to export your location history</DialogTitle>
-            <DialogDescription>
-              Open your Google Maps application on your phone. Go to {' '}
-              <strong>Settings</strong>, then {' '}
-              <strong>Timeline</strong>, then choose {' '}
-              <strong>Export location history</strong>.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="secondary">Close</Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              variant="link"
+              className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100 pointer-events-auto"
+            >
+              Show me how
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>How to export your location history</DialogTitle>
+              <DialogDescription>
+                Open your Google Maps application on your phone. Go to{' '}
+                <strong>Settings</strong>, then{' '}
+                <strong>Timeline</strong>, then choose{' '}
+                <strong>Export location history</strong>.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary">Close</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
 
       <Input
         ref={fileInputRef}
@@ -133,9 +142,9 @@ function App() {
       <Toggle
         pressed={showEmoji}
         onPressedChange={setShowEmoji}
-        className="mx-auto"
+        className="self-end pointer-events-auto"
       >
-        Show emoji
+        Toggle flags
       </Toggle>
 
       {error && <p className="text-red-600">{error}</p>}
