@@ -58,7 +58,7 @@ export function SchengenCalendar({
     <div className="overflow-x-auto">
       <div className="flex gap-1 text-xs mb-1">
         {monthLabels.map((label, idx) => (
-          <div key={idx} className="h-4 w-3 flex items-center justify-center">
+          <div key={idx} className="h-5 w-5 flex items-center justify-center">
             {label}
           </div>
         ))}
@@ -75,12 +75,12 @@ export function SchengenCalendar({
                     : day.date.toISOString().split("T")[0]
                 }
                 className={cn(
-                  "h-3 w-3 rounded-sm flex items-center justify-center overflow-hidden",
+                  "h-5 w-5 rounded-sm flex items-center justify-center overflow-hidden",
                   !day.country && "bg-muted"
                 )}
               >
                 {day.country && (
-                  <span className="mask-circle text-[10px] leading-none">
+                  <span className="mask-circle text-lg leading-none">
                     {day.country.emoji}
                   </span>
                 )}
