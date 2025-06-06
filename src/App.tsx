@@ -53,23 +53,25 @@ function App() {
   return (
     <div className="flex min-h-svh flex-col items-center gap-6 p-4">
       <Story />
+
       <Button className="mt-10" onClick={handleUploadClick}>
         Import
       </Button>
+
       <Dialog>
         <DialogTrigger asChild>
-          <button className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100">
+          <Button variant="link" className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100">
             Show me how
-          </button>
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>How to export your location history</DialogTitle>
             <DialogDescription>
-              Open your Google Maps application on your phone. Go to
-              <strong className="mx-1">Settings</strong>, then
-              <strong className="mx-1">Timeline</strong>, then choose
-              <strong className="mx-1">Export location history</strong>.
+              Open your Google Maps application on your phone. Go to {' '}
+              <strong>Settings</strong>, then {' '}
+              <strong>Timeline</strong>, then choose {' '}
+              <strong>Export location history</strong>.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -79,6 +81,7 @@ function App() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
       <Input
         ref={fileInputRef}
         type="file"
@@ -86,6 +89,7 @@ function App() {
         onChange={onChange}
         className="hidden"
       />
+
       <Toggle
         pressed={showEmoji}
         onPressedChange={setShowEmoji}
@@ -93,6 +97,7 @@ function App() {
       >
         Show emoji
       </Toggle>
+
       {error && <p className="text-red-600">{error}</p>}
 
       {data && (
@@ -104,7 +109,7 @@ function App() {
 
       <SchengenCalendar stats={stats} daysSet={daysSet} showEmoji={showEmoji} />
 
-      <footer className="mt-auto text-center text-xs opacity-60">
+      <footer className="mt-8 mb-2 text-center text-xs opacity-60">
         Made in exile by Richard MacCaw
       </footer>
     </div>
