@@ -6,6 +6,7 @@ import { SchengenCalendar } from "@/components/SchengenCalendar"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { Input } from "./components/ui/input"
 import { Story } from "@/components/Story"
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@/components/ui/dialog"
 
 function App() {
   const [data, setData] = useState<ProcessingResult | null>(null);
@@ -53,8 +54,31 @@ function App() {
     <div className="flex min-h-svh flex-col items-center gap-6 p-4">
       <Story />
       <Button className="mt-10" onClick={handleUploadClick}>
-        Import location-history.json
+        Import
       </Button>
+      <Dialog>
+        <DialogTrigger asChild>
+          <button className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100">
+            Show me how
+          </button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>How to export your location history</DialogTitle>
+            <DialogDescription>
+              Open your Google Maps application on your phone. Go to
+              <strong className="mx-1">Settings</strong>, then
+              <strong className="mx-1">Timeline</strong>, then choose
+              <strong className="mx-1">Export location history</strong>.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="secondary">Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <Input
         ref={fileInputRef}
         type="file"
