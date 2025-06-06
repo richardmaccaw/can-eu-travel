@@ -8,7 +8,7 @@
     "build": "pnpm run merge-geo && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "merge-geo": "node scripts/merge-geo.js"
+    "merge-geo": "node scripts/merge-geo.cjs"
   },
   "dependencies": {
     "@turf/boolean-point-in-polygon": "^7.2.0",
