@@ -139,13 +139,6 @@ function App() {
       />
 
 
-      <Toggle
-        pressed={showEmoji}
-        onPressedChange={setShowEmoji}
-        className="self-end pointer-events-auto"
-      >
-        Toggle flags
-      </Toggle>
 
       {error && <p className="text-red-600">{error}</p>}
 
@@ -165,7 +158,8 @@ function App() {
         )
       }
 
-      <SchengenCalendar stats={stats} daysSet={daysSet} showEmoji={showEmoji} />
+
+      <SchengenCalendar stats={stats} daysSet={daysSet} />
 
       <footer className="mt-8 mb-2 text-center text-xs opacity-60">
         Made in exile by Richard MacCaw
