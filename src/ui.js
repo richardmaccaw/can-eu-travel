@@ -1,6 +1,6 @@
 // ui.js
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './components/ui/card.js';
-import { Badge } from './components/ui/badge.js';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './components/ui/card.jsx';
+import { Badge } from './components/ui/badge.jsx';
 import { formatDate } from './utils.js';
 
 export function createResultsDisplay(stats, daysSet, isSample = false) {
