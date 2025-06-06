@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 (async function merge() {
-  const geoDir = path.join(__dirname, '..', 'public', 'geo');
+  const geoDir = path.join(__dirname, 'geo');
   const outputFile = path.join(__dirname, '..', 'public', 'schengen.geo.json');
   const files = fs.readdirSync(geoDir).filter(f => f.endsWith('.geo.json'));
   const features = [];
