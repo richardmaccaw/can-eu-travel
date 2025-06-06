@@ -7,25 +7,8 @@ import { Input } from "@/components/ui/input"
 import { Story } from "@/components/Story"
 import { ArrowDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useSmoothScrollTo } from "@/hooks/useSmoothScrollTo"
 
-function smoothScrollTo(element: HTMLElement, duration = 1500) {
-  const start = window.scrollY
-  const rect = element.getBoundingClientRect()
-  const target = rect.top + start - window.innerHeight / 2 + rect.height / 2
-  const diff = target - start
-  const startTime = performance.now()
-  const easeInOut = (t: number) =>
-    t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
-
-  function step(currentTime: number) {
-    const progress = Math.min((currentTime - startTime) / duration, 1)
-    const ease = easeInOut(progress)
-    window.scrollTo({ top: start + diff * ease })
-    if (progress < 1) requestAnimationFrame(step)
-  }
-
-  requestAnimationFrame(step)
-}
 
 function App() {
   const [data, setData] = useState<ProcessingResult | null>(null);
@@ -85,10 +68,9 @@ function App() {
     fileInputRef.current?.click()
   }
 
+  const smoothScrollTo = useSmoothScrollTo()
   const handleSkipClick = () => {
-    if (importButtonRef.current) {
-      smoothScrollTo(importButtonRef.current)
-    }
+    smoothScrollTo(importButtonRef.current)
   }
 
   return (
