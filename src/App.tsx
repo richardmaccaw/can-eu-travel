@@ -92,7 +92,7 @@ function App() {
       
       <Story />
       
-      <Button className="mt-10" onClick={handleUploadClick}>
+      <Button ref={importButtonRef} className="mt-10" onClick={handleUploadClick}>
         Import location-history.json
       </Button>
 
