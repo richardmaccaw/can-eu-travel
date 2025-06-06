@@ -72,9 +72,16 @@ function App() {
       {error && <p className="text-red-600">{error}</p>}
 
       {data && (
-        <div className="space-y-1">
-          <p>Days used: {data.stats.used}</p>
-          <p>Days left: {data.stats.left}</p>
+        <div className="animate-in fade-in space-y-2 text-center">
+          <p className="text-balance font-serif text-7xl font-semibold">
+            {data.stats.left > 0
+              ? `${String(data.stats.left)} days left`
+              : 'No days left'}
+          </p>
+          <p className="text-sm">Days used: {data.stats.used}</p>
+          {data.stats.left <= 0 && (
+            <p className="text-red-600 text-lg">You have overstayed!</p>
+          )}
         </div>
       )}
 
