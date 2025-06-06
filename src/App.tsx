@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Toggle } from "@/components/ui/toggle"
 import { SchengenFileProcessor, type ProcessingResult } from "@/lib/schengen/processor"
 import { useCallback, useRef, useState, useEffect } from "react"
 import { SchengenCalendar } from "@/components/SchengenCalendar"
@@ -18,6 +19,7 @@ function App() {
   const [hideSkip, setHideSkip] = useState(false)
   const [stats] = useState(sampleStats)
   const [daysSet] = useState(sampleDaysSet)
+  const [showEmoji, setShowEmoji] = useState(false)
 
   useEffect(() => {
     const btn = importButtonRef.current
@@ -74,6 +76,7 @@ function App() {
   }
 
   return (
+
     <div className="flex min-h-svh flex-col gap-4 p-4">
       <Button
         variant="ghost"
@@ -86,8 +89,13 @@ function App() {
         Skip
         <ArrowDown className="ml-1 transition-transform duration-300 group-hover:translate-y-1 group-hover:animate-bounce" />
       </Button>
+      
       <Story />
-      <Button ref={importButtonRef} onClick={handleUploadClick}>Import location-history.json </Button>
+      
+      <Button className="mt-10" onClick={handleUploadClick}>
+        Import location-history.json
+      </Button>
+
       <Input
         ref={fileInputRef}
         type="file"
@@ -95,16 +103,35 @@ function App() {
         onChange={onChange}
         className="hidden"
       />
+      
+      <Toggle
+        pressed={showEmoji}
+        onPressedChange={setShowEmoji}
+        className="mx-auto"
+      >
+        Show emoji
+      </Toggle>
       {error && <p className="text-red-600">{error}</p>}
 
       {data && (
-        <div className="space-y-1">
-          <p>Days used: {data.stats.used}</p>
-          <p>Days left: {data.stats.left}</p>
+        <div className="animate-in fade-in space-y-2 text-center">
+          <p className="text-balance font-serif text-7xl font-semibold">
+            {data.stats.left > 0
+              ? `${String(data.stats.left)} days left`
+              : 'No days left'}
+          </p>
+          <p className="text-sm">Days used: {data.stats.used}</p>
+          {data.stats.left <= 0 && (
+            <p className="text-red-600 text-lg">You have overstayed!</p>
+          )}
         </div>
       )}
 
-      <SchengenCalendar stats={stats} daysSet={daysSet} />
+      <SchengenCalendar stats={stats} daysSet={daysSet} showEmoji={showEmoji} />
+
+      <footer className="mt-auto text-center text-xs opacity-60">
+        Made in exile by Richard MacCaw
+      </footer>
     </div>
   )
 }
