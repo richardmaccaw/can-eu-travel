@@ -67,9 +67,9 @@ export function SchengenCalendar({
           </div>
         ))}
       </div>
-      <div className="flex gap-0.5">
+      <div className="flex gap-2">
         {weeks.map((week, wIdx) => (
-          <div key={wIdx} className="flex flex-1 flex-col gap-0.5">
+          <div key={wIdx} className="flex flex-1 flex-col gap-2">
             {week.map((day, dIdx) => (
               <div
                 key={dIdx}
@@ -85,7 +85,7 @@ export function SchengenCalendar({
                 )}
               >
                 {day.country && showEmoji && (
-                  <span className="mask-circle text-lg leading-none">
+                  <span className="mask-circle text-2xl leading-none">
                     {day.country.emoji}
                   </span>
                 )}

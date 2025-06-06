@@ -13,7 +13,7 @@ function App() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [stats] = useState(sampleStats)
   const [daysSet] = useState(sampleDaysSet)
-  const [showEmoji, setShowEmoji] = useState(true)
+  const [showEmoji, setShowEmoji] = useState(false)
 
 
   const handleFile = useCallback(async (file: File) => {
@@ -67,7 +67,7 @@ function App() {
         onPressedChange={setShowEmoji}
         className="mx-auto"
       >
-        Show flags
+        Show emoji
       </Toggle>
       {error && <p className="text-red-600">{error}</p>}
 
