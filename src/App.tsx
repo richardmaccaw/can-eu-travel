@@ -22,7 +22,6 @@ function App() {
   const [daysSet] = useState(sampleDaysSet)
   const countedLeft = useCountUp(data ? data.stats.left : null)
 
-
   useEffect(() => {
     const btn = importButtonRef.current
     if (!btn) return
