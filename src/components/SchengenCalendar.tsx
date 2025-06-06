@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import { cn } from "@/lib/utils"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { sampleDaysSet, sampleStats, type Stats } from "@/fixtures/sampleData"
 import { msToUTCmidnight } from "@/lib/schengen/dateUtils"
 
@@ -47,23 +48,22 @@ export function SchengenCalendar({
     const fmt = new Intl.DateTimeFormat("en", { month: "short" })
     return weeks.map((week, idx) => {
       const month = fmt.format(week[0].date)
-      const prev = weeks[idx - 1]?.[0].date
-      return !prev || prev.getUTCMonth() !== week[0].date.getUTCMonth()
-        ? month
-        : ""
+      if (idx === 0) return month
+      const prev = weeks[idx - 1][0].date
+      return prev.getUTCMonth() !== week[0].date.getUTCMonth() ? month : ""
     })
   }, [weeks])
 
   return (
-    <div className="overflow-x-auto">
-      <div className="flex gap-1 text-xs mb-1">
+    <ScrollArea orientation="horizontal" className="max-w-full sm:overflow-visible">
+      <div className="flex gap-1 text-xs mb-1 w-fit">
         {monthLabels.map((label, idx) => (
           <div key={idx} className="h-5 w-5 flex items-center justify-center">
             {label}
           </div>
         ))}
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-1 w-fit">
         {weeks.map((week, wIdx) => (
           <div key={wIdx} className="flex flex-col gap-1">
             {week.map((day, dIdx) => (
@@ -89,6 +89,6 @@ export function SchengenCalendar({
           </div>
         ))}
       </div>
-    </div>
+    </ScrollArea>
   )
 }
