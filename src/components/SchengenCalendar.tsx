@@ -10,7 +10,7 @@ export interface SchengenCalendarProps {
 
 interface DayInfo {
   date: Date
-  inSchengen: boolean
+  country?: { name: string; emoji: string }
 }
 
 export function SchengenCalendar({
@@ -30,7 +30,7 @@ export function SchengenCalendar({
     for (let i = 0; i < 180; i++) {
       const ms = startMs + i * 86_400_000
       const date = new Date(ms)
-      arr.push({ date, inSchengen: days.has(ms) })
+      arr.push({ date, country: days.get(ms) })
     }
     return arr
   }, [startMs, days])
@@ -58,7 +58,7 @@ export function SchengenCalendar({
     <div className="overflow-x-auto">
       <div className="flex gap-1 text-xs mb-1">
         {monthLabels.map((label, idx) => (
-          <div key={idx} className="h-4 w-3 flex items-center justify-center">
+          <div key={idx} className="h-5 w-5 flex items-center justify-center">
             {label}
           </div>
         ))}
@@ -69,12 +69,22 @@ export function SchengenCalendar({
             {week.map((day, dIdx) => (
               <div
                 key={dIdx}
-                title={day.date.toISOString().split("T")[0]}
+                title={
+                  day.country
+                    ? `${day.date.toISOString().split("T")[0]} - ${day.country.name}`
+                    : day.date.toISOString().split("T")[0]
+                }
                 className={cn(
-                  "h-3 w-3 rounded-sm",
-                  day.inSchengen ? "bg-primary" : "bg-muted"
+                  "h-5 w-5 rounded-sm flex items-center justify-center overflow-hidden",
+                  !day.country && "bg-muted"
                 )}
-              />
+              >
+                {day.country && (
+                  <span className="mask-circle text-lg leading-none">
+                    {day.country.emoji}
+                  </span>
+                )}
+              </div>
             ))}
           </div>
         ))}

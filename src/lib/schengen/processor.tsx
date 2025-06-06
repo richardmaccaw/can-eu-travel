@@ -1,4 +1,4 @@
-import { timelineToVisit, collectSchengenDays, windowStats, type Visit, type TimelineEntry } from './calculator';
+import { timelineToVisit, collectSchengenDays, windowStats, type Visit, type TimelineEntry, type CountryInfo } from './calculator';
 
 export interface ProcessingResult {
   stats: {
@@ -6,7 +6,7 @@ export interface ProcessingResult {
     left: number;
     windowStart: number;
   };
-  daysSet: Map<number, Record<string, unknown>>;
+  daysSet: Map<number, CountryInfo>;
   visits: Visit[];
 }
 
