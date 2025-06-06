@@ -26,4 +26,4 @@ yarn-error.log*
 .env.*
 
 # Cursor IDE files
-.cursor/ 
+.cursor/ package-lock.json

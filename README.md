@@ -1,6 +1,16 @@
+# Schengen Calculator (React)
 
-![localhost_5173_](https://github.com/user-attachments/assets/939b9160-1a69-4937-95b7-470e5cea42a8)
+This is a minimal React + TypeScript implementation of the original Schengen day calculator. Upload your Google Maps timeline export and the app will compute the number of days used and remaining within the 90/180 rule.
 
-### polygons need a bit of love ;)
-<img width="828" alt="image" src="https://github.com/user-attachments/assets/18e4bfc7-be0f-43bc-936c-82d016735bb6" />
+## Development
 
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```

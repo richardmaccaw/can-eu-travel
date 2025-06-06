@@ -4,33 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/style.css --minify",
-    "build:vite": "vite build",
-    "build:geojson": "node scripts/combine-geojson.js",
-    "build": "npm run build:vite && npm run build:css && npm run build:geojson"
-  },
-  "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10",
-    "@turf/turf": "^7.2.0",
-    "@vitejs/plugin-react": "^4.0.0",
-    "autoprefixer": "^10.4.21",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
-    "lucide-react": "^0.294.0",
-    "postcss": "^8.5.3",
-    "tailwind-merge": "^2.0.0",
-    "tailwindcss": "^3.3.5",
-    "tailwindcss-animate": "^1.0.7",
-    "vite": "^6.3.3"
+    "build": "vite build"
   },
   "dependencies": {
     "@turf/boolean-point-in-polygon": "^7.2.0",
     "@turf/helpers": "^7.2.0",
     "@turf/projection": "^7.2.0",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.0.0"
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.24",
+    "@types/react-dom": "^18.2.8",
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "^5.2.2",
+    "vite": "^6.3.3"
   }
 }
