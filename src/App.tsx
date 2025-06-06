@@ -1,19 +1,55 @@
 import { Button } from "@/components/ui/button"
 import { SchengenFileProcessor, type ProcessingResult } from "@/lib/schengen/processor"
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useRef, useState, useEffect } from "react"
 import { SchengenCalendar } from "@/components/SchengenCalendar"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { Input } from "@/components/ui/input"
 import { Story } from "@/components/Story"
 import { ArrowDown } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+function smoothScrollTo(element: HTMLElement, duration = 1500) {
+  const start = window.scrollY
+  const rect = element.getBoundingClientRect()
+  const target = rect.top + start - window.innerHeight / 2 + rect.height / 2
+  const diff = target - start
+  const startTime = performance.now()
+  const easeInOut = (t: number) =>
+    t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+
+  function step(currentTime: number) {
+    const progress = Math.min((currentTime - startTime) / duration, 1)
+    const ease = easeInOut(progress)
+    window.scrollTo({ top: start + diff * ease })
+    if (progress < 1) requestAnimationFrame(step)
+  }
+
+  requestAnimationFrame(step)
+}
 
 function App() {
   const [data, setData] = useState<ProcessingResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null)
   const importButtonRef = useRef<HTMLButtonElement>(null)
+  const [hideSkip, setHideSkip] = useState(false)
   const [stats] = useState(sampleStats)
   const [daysSet] = useState(sampleDaysSet)
+
+  useEffect(() => {
+    const btn = importButtonRef.current
+    if (!btn) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHideSkip(entry.isIntersecting)
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(btn)
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
 
 
   const handleFile = useCallback(async (file: File) => {
@@ -50,14 +86,19 @@ function App() {
   }
 
   const handleSkipClick = () => {
-    importButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    if (importButtonRef.current) {
+      smoothScrollTo(importButtonRef.current)
+    }
   }
 
   return (
     <div className="flex min-h-svh flex-col gap-4 p-4">
       <Button
         variant="ghost"
-        className="sticky top-2 self-end group"
+        className={cn(
+          "sticky top-2 self-end group transition-opacity duration-500",
+          hideSkip && "opacity-0 pointer-events-none"
+        )}
         onClick={handleSkipClick}
       >
         Skip
