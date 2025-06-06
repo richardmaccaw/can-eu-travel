@@ -11,7 +11,6 @@ const Card = ({
         className
       )}
       {...props} />)
-      );
   )
 }
 
@@ -23,7 +22,6 @@ const CardHeader = ({
     (<div
       className={cn("flex flex-col space-y-1.5 p-6", className)}
       {...props} />)
-      );
   )
 }
 
@@ -38,7 +36,6 @@ const CardTitle = ({
         className
       )}
       {...props} />)
-      );
   )
 }
 
@@ -50,7 +47,6 @@ const CardDescription = ({
     (<p
       className={cn("text-sm text-muted-foreground", className)}
       {...props} />)
-      );
   )
 }
 
@@ -59,7 +55,6 @@ const CardContent = ({
   ...props
 }) => {
   return (<div className={cn("p-6 pt-0", className)} {...props} />)
-  )
 }
 
 const CardFooter = ({
@@ -70,7 +65,6 @@ const CardFooter = ({
     (<div
       className={cn("flex items-center p-6 pt-0", className)}
       {...props} />)
-      );
   )
 }
 
