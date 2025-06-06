@@ -10,6 +10,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { ArrowDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSmoothScrollTo } from "@/hooks/useSmoothScrollTo"
+import { useCountUp } from "@/hooks/useCountUp"
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   const [stats] = useState(sampleStats)
   const [daysSet] = useState(sampleDaysSet)
   const [showEmoji, setShowEmoji] = useState(false)
+  const countedLeft = useCountUp(data ? data.stats.left : null)
 
   useEffect(() => {
     const btn = importButtonRef.current
@@ -142,20 +144,27 @@ function App() {
 
       {error && <p className="text-red-600">{error}</p>}
 
-      {
-        data && (
-          <div className="animate-in fade-in space-y-2 text-center pt-50 pb-10">
-            <p className="text-balance font-serif text-7xl font-semibold">
-              {data.stats.left > 0
-                ? `${String(data.stats.left)} days left`
-                : 'No days left'}
-            </p>
+      <div className={cn('space-y-2 text-center', data && 'animate-in fade-in')}>
+        <p
+          className={cn(
+            'text-balance font-serif text-7xl font-semibold transition-colors',
+            !data && 'text-muted-foreground opacity-30'
+          )}
+        >
+          {data
+            ? data.stats.left > 0
+              ? `${String(countedLeft ?? '?')} days left`
+              : 'No days left'
+            : '? days left'}
+        </p>
+        {data && (
+          <>
             {data.stats.left <= 0 && (
               <p className="text-red-600 text-lg">You have overstayed!</p>
             )}
-          </div>
-        )
-      }
+          </>
+        )}
+      </div>
 
 
       <SchengenCalendar stats={stats} daysSet={daysSet} />
