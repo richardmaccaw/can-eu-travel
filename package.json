@@ -11,6 +11,7 @@
     "merge-geo": "node scripts/merge-geo.cjs"
   },
   "dependencies": {
+    "@radix-ui/react-scroll-area": "^1.2.9",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.8",
     "@turf/boolean-point-in-polygon": "^7.2.0",
