@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react"
 import { cn } from "@/lib/utils"
 import { sampleDaysSet, sampleStats, type Stats } from "@/fixtures/sampleData"
+import { msToUTCmidnight } from "@/lib/schengen/dateUtils"
 
 export interface SchengenCalendarProps {
   stats?: Stats
@@ -19,15 +20,20 @@ export function SchengenCalendar({
   const [stats] = useState(initialStats)
   const [days] = useState(initialDays)
 
+  const startMs = useMemo(
+    () => msToUTCmidnight(stats.windowStart),
+    [stats.windowStart]
+  )
+
   const dayList: DayInfo[] = useMemo(() => {
     const arr: DayInfo[] = []
     for (let i = 0; i < 180; i++) {
-      const ms = stats.windowStart + i * 86_400_000
+      const ms = startMs + i * 86_400_000
       const date = new Date(ms)
       arr.push({ date, inSchengen: days.has(ms) })
     }
     return arr
-  }, [stats.windowStart, days])
+  }, [startMs, days])
 
   const weeks = useMemo(() => {
     const w: DayInfo[][] = []
