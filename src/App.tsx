@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button"
+import { Toggle } from "@/components/ui/toggle"
 import { SchengenFileProcessor, type ProcessingResult } from "@/lib/schengen/processor"
 import { useCallback, useRef, useState } from "react"
 import { SchengenCalendar } from "@/components/SchengenCalendar"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
-import { Input } from "./components/ui/input";
+import { Input } from "./components/ui/input"
 import { Story } from "@/components/Story"
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [stats] = useState(sampleStats)
   const [daysSet] = useState(sampleDaysSet)
+  const [showEmoji, setShowEmoji] = useState(true)
 
 
   const handleFile = useCallback(async (file: File) => {
@@ -48,9 +50,11 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-svh flex-col gap-4 p-4">
+    <div className="flex min-h-svh flex-col items-center gap-6 p-4">
       <Story />
-      <Button onClick={handleUploadClick}>Import location-history.json </Button>
+      <Button className="mt-10" onClick={handleUploadClick}>
+        Import location-history.json
+      </Button>
       <Input
         ref={fileInputRef}
         type="file"
@@ -58,6 +62,13 @@ function App() {
         onChange={onChange}
         className="hidden"
       />
+      <Toggle
+        pressed={showEmoji}
+        onPressedChange={setShowEmoji}
+        className="mx-auto"
+      >
+        Show flags
+      </Toggle>
       {error && <p className="text-red-600">{error}</p>}
 
       {data && (
@@ -67,7 +78,7 @@ function App() {
         </div>
       )}
 
-      <SchengenCalendar stats={stats} daysSet={daysSet} />
+      <SchengenCalendar stats={stats} daysSet={daysSet} showEmoji={showEmoji} />
     </div>
   )
 }

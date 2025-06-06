@@ -6,6 +6,7 @@ import { msToUTCmidnight } from "@/lib/schengen/dateUtils"
 export interface SchengenCalendarProps {
   stats?: Stats
   daysSet?: Map<number, { name: string; emoji: string }>
+  showEmoji?: boolean
 }
 
 interface DayInfo {
@@ -16,6 +17,7 @@ interface DayInfo {
 export function SchengenCalendar({
   stats: initialStats = sampleStats,
   daysSet: initialDays = sampleDaysSet,
+  showEmoji = true,
 }: SchengenCalendarProps) {
   const [stats] = useState(initialStats)
   const [days] = useState(initialDays)
@@ -57,17 +59,17 @@ export function SchengenCalendar({
   }, [weeks])
 
   return (
-    <div className="overflow-x-auto">
-      <div className="flex gap-1 text-xs mb-1">
+    <div className="w-full max-w-6xl mx-auto">
+      <div className="flex gap-0.5 text-xs mb-1">
         {monthLabels.map((label, idx) => (
-          <div key={idx} className="h-5 w-5 flex items-center justify-center">
+          <div key={idx} className="flex-1 h-5 flex items-center justify-center">
             {label}
           </div>
         ))}
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-0.5">
         {weeks.map((week, wIdx) => (
-          <div key={wIdx} className="flex flex-col gap-1">
+          <div key={wIdx} className="flex flex-1 flex-col gap-0.5">
             {week.map((day, dIdx) => (
               <div
                 key={dIdx}
@@ -77,11 +79,12 @@ export function SchengenCalendar({
                     : day.date.toISOString().split("T")[0]
                 }
                 className={cn(
-                  "h-5 w-5 rounded-sm flex items-center justify-center overflow-hidden",
-                  !day.country && "bg-muted"
+                  "aspect-square w-full rounded-sm flex items-center justify-center overflow-hidden",
+                  !day.country && "bg-muted",
+                  day.country && !showEmoji && "bg-foreground"
                 )}
               >
-                {day.country && (
+                {day.country && showEmoji && (
                   <span className="mask-circle text-lg leading-none">
                     {day.country.emoji}
                   </span>
