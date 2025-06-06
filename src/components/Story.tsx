@@ -10,7 +10,7 @@ const paragraphs = [
   "After a long pause, she picked up the phone and spoke rapid Danish to someone who sounded very important and very unimpressed. I heard my name. I heard \u201cUnited Kingdom.\u201d I heard \u201cnon-resident overstayer?\u201d followed by the unmistakable European sigh of bureaucratic doom.",
   "My wife was already picking up her luggage.",
   "Eventually, with a dramatic sigh and one final scowl, she handed back my passport and said:",
-  "\u201cYou\u2019ve overstayed. But\u2026 we\u2019ll grant you 24 more hours.\u201d",
+  "\u201cYou\u2019ve overstayed. But\u2026 we grant you 24 more hours.\u201d",
   "One more day in the EU. Like some kind of Brexit Cinderella, I had until midnight (the next day) before I turned back into a pumpkin and was catapulted across the North Sea.",
   "That\u2019s when I knew: there had to be a better way.",
   "So I built this calculator.",
