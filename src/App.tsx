@@ -95,33 +95,42 @@ function App() {
 
       <Story />
 
-      <Button ref={importButtonRef} className="mt-10" onClick={handleUploadClick}>
-        Import
-      </Button>
+      <div className="flex flex-col items-center gap-2">
+        <Button
+          ref={importButtonRef}
+          className="mt-10 w-auto pointer-events-auto"
+          onClick={handleUploadClick}
+        >
+          Import
+        </Button>
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="link" className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100">
-            Show me how
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>How to export your location history</DialogTitle>
-            <DialogDescription>
-              Open your Google Maps application on your phone. Go to {' '}
-              <strong>Settings</strong>, then {' '}
-              <strong>Timeline</strong>, then choose {' '}
-              <strong>Export location history</strong>.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="secondary">Close</Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              variant="link"
+              className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100 pointer-events-auto"
+            >
+              Show me how
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>How to export your location history</DialogTitle>
+              <DialogDescription>
+                Open your Google Maps application on your phone. Go to{' '}
+                <strong>Settings</strong>, then{' '}
+                <strong>Timeline</strong>, then choose{' '}
+                <strong>Export location history</strong>.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary">Close</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
 
       <Input
         ref={fileInputRef}
@@ -132,13 +141,6 @@ function App() {
       />
 
 
-      <Toggle
-        pressed={showEmoji}
-        onPressedChange={setShowEmoji}
-        className="mx-auto"
-      >
-        Show emoji
-      </Toggle>
 
       {error && <p className="text-red-600">{error}</p>}
 
@@ -157,7 +159,6 @@ function App() {
         </p>
         {data && (
           <>
-            <p className="text-sm">Days used: {data.stats.used}</p>
             {data.stats.left <= 0 && (
               <p className="text-red-600 text-lg">You have overstayed!</p>
             )}
@@ -165,7 +166,8 @@ function App() {
         )}
       </div>
 
-      <SchengenCalendar stats={stats} daysSet={daysSet} showEmoji={showEmoji} />
+
+      <SchengenCalendar stats={stats} daysSet={daysSet} />
 
       <footer className="mt-8 mb-2 text-center text-xs opacity-60">
         Made in exile by Richard MacCaw

@@ -2,11 +2,11 @@ import { useMemo, useState } from "react"
 import { cn } from "@/lib/utils"
 import { sampleDaysSet, sampleStats, type Stats } from "@/fixtures/sampleData"
 import { msToUTCmidnight } from "@/lib/schengen/dateUtils"
+import { Toggle } from "@/components/ui/toggle"
 
 export interface SchengenCalendarProps {
   stats?: Stats
   daysSet?: Map<number, { name: string; emoji: string }>
-  showEmoji?: boolean
 }
 
 interface DayInfo {
@@ -17,10 +17,10 @@ interface DayInfo {
 export function SchengenCalendar({
   stats: initialStats = sampleStats,
   daysSet: initialDays = sampleDaysSet,
-  showEmoji = true,
 }: SchengenCalendarProps) {
   const [stats] = useState(initialStats)
   const [days] = useState(initialDays)
+  const [showEmoji, setShowEmoji] = useState(false)
 
   const startMs = useMemo(
     () => msToUTCmidnight(stats.windowStart),
@@ -60,6 +60,15 @@ export function SchengenCalendar({
 
   return (
     <div className="w-full max-w-6xl mx-auto">
+      <div className="flex justify-end mb-2">
+        <Toggle
+          pressed={showEmoji}
+          onPressedChange={setShowEmoji}
+          className="pointer-events-auto"
+        >
+          Toggle flags
+        </Toggle>
+      </div>
       <div className="flex gap-0.5 text-xs mb-1">
         {monthLabels.map((label, idx) => (
           <div key={idx} className="flex-1 h-5 flex items-center justify-center">
