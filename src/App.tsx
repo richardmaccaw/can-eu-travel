@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react"
 import { SchengenCalendar } from "@/components/SchengenCalendar"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { Input } from "./components/ui/input";
+import { Story } from "@/components/Story"
 
 function App() {
   const [data, setData] = useState<ProcessingResult | null>(null);
@@ -47,7 +48,8 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center gap-4 p-4">
+    <div className="flex min-h-svh flex-col gap-4 p-4">
+      <Story />
       <Button onClick={handleUploadClick}>Click me</Button>
       <Input
         ref={fileInputRef}

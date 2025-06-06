@@ -47,8 +47,10 @@ export function SchengenCalendar({
     const fmt = new Intl.DateTimeFormat("en", { month: "short" })
     return weeks.map((week, idx) => {
       const month = fmt.format(week[0].date)
-      const prev = weeks[idx - 1]?.[0].date
-      return !prev || prev.getUTCMonth() !== week[0].date.getUTCMonth()
+      const prevWeek = weeks[idx - 1]
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      const prevDate = prevWeek ? prevWeek[0].date : undefined
+      return !prevDate || prevDate.getUTCMonth() !== week[0].date.getUTCMonth()
         ? month
         : ""
     })
