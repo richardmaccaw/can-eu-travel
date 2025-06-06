@@ -2,27 +2,31 @@ import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import { point } from '@turf/helpers'
 import { msToUTCmidnight } from './dateUtils'
 import { parseLatLon } from "./locationUtils";
+import type { FeatureCollection, Feature, Polygon, MultiPolygon } from 'geojson'
 
 
-let schengenCache: any = null
+type SchengenFeature = Feature<Polygon | MultiPolygon, Record<string, unknown>>
+type SchengenCollection = FeatureCollection<Polygon | MultiPolygon, Record<string, unknown>>
 
-export async function loadSchengen(): Promise<any> {
+let schengenCache: SchengenCollection | null = null
+
+export async function loadSchengen(): Promise<SchengenCollection> {
     if (schengenCache) return schengenCache
     const resp = await fetch('schengen.geo.json')
     if (!resp.ok) throw new Error('Failed to load Schengen borders')
-    schengenCache = await resp.json()
+    schengenCache = await resp.json() as SchengenCollection
     return schengenCache
 }
 
-export async function getSchengenCountry(lat: number, lon: number): Promise<any | null> {
+export async function getSchengenCountry(lat: number, lon: number): Promise<Record<string, unknown> | null> {
     const geoJson = await loadSchengen()
     const pt = point([lon, lat])
-    const country = geoJson.features.find((c: any) => booleanPointInPolygon(pt, c))
+    const country = geoJson.features.find((c: SchengenFeature) => booleanPointInPolygon(pt, c))
     return country ? country.properties : null
 }
 
-export async function collectSchengenDays(visits: Iterable<Visit>): Promise<Map<number, any>> {
-    const days = new Map<number, any>()
+export async function collectSchengenDays(visits: Iterable<Visit>): Promise<Map<number, Record<string, unknown>>> {
+    const days = new Map<number, Record<string, unknown>>()
     for (const v of visits) {
         const country = await getSchengenCountry(v.lat, v.lon)
         if (!country) continue
@@ -55,7 +59,17 @@ export interface Visit {
     lon: number;
 }
 
-export function* timelineToVisit(timelineArray: any[]): Generator<Visit> {
+export interface TimelineEntry {
+    startTime: string
+    endTime: string
+    visit?: {
+        topCandidate: {
+            placeLocation: string
+        }
+    }
+}
+
+export function* timelineToVisit(timelineArray: Iterable<TimelineEntry>): Generator<Visit> {
     for (const entry of timelineArray) {
         if (!entry.visit) continue;
         const { startTime, endTime, visit } = entry;

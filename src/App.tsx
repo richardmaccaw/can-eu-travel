@@ -28,14 +28,18 @@ function App() {
       const result = await processor.processFile(file);
       setData(result);
 
-    } catch (err: any) {
-      setError(err.message || 'Failed to read file');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Failed to read file');
+      }
     }
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (file) handleFile(file)
+    if (file) void handleFile(file)
   }
 
   const handleUploadClick = () => {
