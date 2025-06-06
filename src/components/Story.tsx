@@ -1,5 +1,3 @@
-import { ScrollArea } from "@/components/ui/scroll-area"
-
 const paragraphs = [
   "Why I Built This Calculator (A Tragicomedy in 90 Days)",
   "It all began at the Copenhagen border.",
@@ -19,19 +17,17 @@ const paragraphs = [
 
 export function Story() {
   return (
-    <ScrollArea className="h-svh w-full snap-y snap-mandatory overflow-y-scroll">
-      <div>
-        {paragraphs.map((p, i) => (
-          <section
-            key={i}
-            className="snap-center h-svh flex items-center justify-center px-6"
-          >
-            <p className="text-balance text-center font-serif text-2xl md:text-4xl">
-              {p}
-            </p>
-          </section>
-        ))}
-      </div>
-    </ScrollArea>
+    <div className="snap-y snap-mandatory">
+      {paragraphs.map((p, i) => (
+        <section
+          key={i}
+          className="snap-center h-svh flex items-center justify-center px-6"
+        >
+          <p className="text-balance text-center font-serif text-2xl md:text-4xl">
+            {p}
+          </p>
+        </section>
+      ))}
+    </div>
   )
 }
