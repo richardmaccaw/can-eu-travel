@@ -14,3 +14,7 @@ pnpm run dev
 ```bash
 pnpm run build
 ```
+
+During the build step all GeoJSON files located in `public/geo` are automatically
+merged into `public/schengen.geo.json` so updated boundaries are reflected on
+deployment.
