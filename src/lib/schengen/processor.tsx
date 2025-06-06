@@ -1,4 +1,3 @@
-// src/lib/SchengenFileProcessor.ts
 import { timelineToVisit, collectSchengenDays, windowStats, type Visit } from './calculator';
 
 export interface ProcessingResult {
