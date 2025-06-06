@@ -6,6 +6,7 @@ import { SchengenCalendar } from "@/components/SchengenCalendar"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { Input } from "@/components/ui/input"
 import { Story } from "@/components/Story"
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@/components/ui/dialog"
 import { ArrowDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSmoothScrollTo } from "@/hooks/useSmoothScrollTo"
@@ -89,12 +90,36 @@ function App() {
         Skip
         <ArrowDown className="ml-1 transition-transform duration-300 group-hover:translate-y-1 group-hover:animate-bounce" />
       </Button>
-      
+
       <Story />
-      
+
       <Button ref={importButtonRef} className="mt-10" onClick={handleUploadClick}>
-        Import location-history.json
+        Import
       </Button>
+
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="link" className="text-sm text-muted-foreground underline opacity-70 hover:opacity-100">
+            Show me how
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>How to export your location history</DialogTitle>
+            <DialogDescription>
+              Open your Google Maps application on your phone. Go to {' '}
+              <strong>Settings</strong>, then {' '}
+              <strong>Timeline</strong>, then choose {' '}
+              <strong>Export location history</strong>.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="secondary">Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Input
         ref={fileInputRef}
@@ -103,7 +128,8 @@ function App() {
         onChange={onChange}
         className="hidden"
       />
-      
+
+
       <Toggle
         pressed={showEmoji}
         onPressedChange={setShowEmoji}
@@ -111,28 +137,31 @@ function App() {
       >
         Show emoji
       </Toggle>
+
       {error && <p className="text-red-600">{error}</p>}
 
-      {data && (
-        <div className="animate-in fade-in space-y-2 text-center">
-          <p className="text-balance font-serif text-7xl font-semibold">
-            {data.stats.left > 0
-              ? `${String(data.stats.left)} days left`
-              : 'No days left'}
-          </p>
-          <p className="text-sm">Days used: {data.stats.used}</p>
-          {data.stats.left <= 0 && (
-            <p className="text-red-600 text-lg">You have overstayed!</p>
-          )}
-        </div>
-      )}
+      {
+        data && (
+          <div className="animate-in fade-in space-y-2 text-center">
+            <p className="text-balance font-serif text-7xl font-semibold">
+              {data.stats.left > 0
+                ? `${String(data.stats.left)} days left`
+                : 'No days left'}
+            </p>
+            <p className="text-sm">Days used: {data.stats.used}</p>
+            {data.stats.left <= 0 && (
+              <p className="text-red-600 text-lg">You have overstayed!</p>
+            )}
+          </div>
+        )
+      }
 
       <SchengenCalendar stats={stats} daysSet={daysSet} showEmoji={showEmoji} />
 
-      <footer className="mt-auto text-center text-xs opacity-60">
+      <footer className="mt-8 mb-2 text-center text-xs opacity-60">
         Made in exile by Richard MacCaw
       </footer>
-    </div>
+    </div >
   )
 }
 
