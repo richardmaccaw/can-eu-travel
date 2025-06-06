@@ -1,0 +1,68 @@
+// src/lib/SchengenFileProcessor.ts
+import { timelineToVisit, collectSchengenDays, windowStats, type Visit } from './calculator';
+
+export interface ProcessingResult {
+  stats: {
+    used: number;
+    left: number;
+    windowStart: number;
+  };
+  daysSet: Map<number, any>;
+  visits: Visit[];
+}
+
+export class SchengenFileProcessor {
+  public async processFile(file: File): Promise<ProcessingResult> {
+    try {
+      const text = await file.text();
+      const jsonArray = JSON.parse(text);
+
+      // Process visits
+      const visits = Array.from(timelineToVisit(jsonArray));
+
+      // Calculate days in Schengen
+      const daysSet = await collectSchengenDays(visits);
+
+      // Calculate statistics
+      const dayArray = [...daysSet.keys()].sort((a, b) => a - b);
+      const stats = windowStats(dayArray);
+
+      return {
+        stats,
+        daysSet,
+        visits
+      };
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : 'Failed to process file');
+    }
+  }
+
+  public async validateFile(file: File): Promise<boolean> {
+    try {
+      const text = await file.text();
+      const jsonArray = JSON.parse(text);
+      return Array.isArray(jsonArray);
+    } catch {
+      return false;
+    }
+  }
+
+  public async getVisitSummary(visits: Visit[]): Promise<{
+    totalVisits: number;
+    totalDays: number;
+    countries: Set<string>;
+  }> {
+    const daysSet = await collectSchengenDays(visits);
+    const countries = new Set<string>();
+
+    for (const [_, country] of daysSet) {
+      countries.add(country.name);
+    }
+
+    return {
+      totalVisits: visits.length,
+      totalDays: daysSet.size,
+      countries
+    };
+  }
+}
