@@ -3,13 +3,15 @@ import { SchengenFileProcessor, type ProcessingResult } from "@/lib/schengen/pro
 import { useCallback, useRef, useState } from "react"
 import { SchengenCalendar } from "@/components/SchengenCalendar"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
-import { Input } from "./components/ui/input";
+import { Input } from "./components/ui/input"
 import { Story } from "@/components/Story"
+import { ArrowDown } from "lucide-react"
 
 function App() {
   const [data, setData] = useState<ProcessingResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const importButtonRef = useRef<HTMLButtonElement>(null)
   const [stats] = useState(sampleStats)
   const [daysSet] = useState(sampleDaysSet)
 
@@ -47,10 +49,22 @@ function App() {
     fileInputRef.current?.click()
   }
 
+  const handleSkipClick = () => {
+    importButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
   return (
     <div className="flex min-h-svh flex-col gap-4 p-4">
+      <Button
+        variant="ghost"
+        className="sticky top-2 self-end group"
+        onClick={handleSkipClick}
+      >
+        Skip
+        <ArrowDown className="ml-1 transition-transform duration-300 group-hover:translate-y-1 group-hover:animate-bounce" />
+      </Button>
       <Story />
-      <Button onClick={handleUploadClick}>Import location-history.json </Button>
+      <Button ref={importButtonRef} onClick={handleUploadClick}>Import location-history.json </Button>
       <Input
         ref={fileInputRef}
         type="file"
