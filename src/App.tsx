@@ -68,6 +68,9 @@ function App() {
       )}
 
       <SchengenCalendar stats={stats} daysSet={daysSet} />
+      <footer className="mt-auto text-center text-xs opacity-60">
+        Made in exile by Richard MacCaw
+      </footer>
     </div>
   )
 }
