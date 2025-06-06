@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Toggle } from "@/components/ui/toggle"
 import { SchengenFileProcessor, type ProcessingResult } from "@/lib/schengen/processor"
 import { useCallback, useRef, useState, useEffect } from "react"
 import { SchengenCalendar } from "@/components/SchengenCalendar"
@@ -20,7 +19,6 @@ function App() {
   const [hideSkip, setHideSkip] = useState(false)
   const [stats] = useState(sampleStats)
   const [daysSet] = useState(sampleDaysSet)
-  const [showEmoji, setShowEmoji] = useState(false)
 
   useEffect(() => {
     const btn = importButtonRef.current
