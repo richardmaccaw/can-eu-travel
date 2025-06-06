@@ -14,10 +14,16 @@ export default tseslint.config(
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.app.json', './tsconfig.node.json'],
+        tsconfigRootDir: new URL('.', import.meta.url).pathname,
+      },
     },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'react-x': reactX,
+      'react-dom': reactDom,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,

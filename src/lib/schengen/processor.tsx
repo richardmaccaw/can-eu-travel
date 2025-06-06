@@ -1,4 +1,4 @@
-import { timelineToVisit, collectSchengenDays, windowStats, type Visit } from './calculator';
+import { timelineToVisit, collectSchengenDays, windowStats, type Visit, type TimelineEntry } from './calculator';
 
 export interface ProcessingResult {
   stats: {
@@ -6,7 +6,7 @@ export interface ProcessingResult {
     left: number;
     windowStart: number;
   };
-  daysSet: Map<number, any>;
+  daysSet: Map<number, Record<string, unknown>>;
   visits: Visit[];
 }
 
@@ -14,7 +14,7 @@ export class SchengenFileProcessor {
   public async processFile(file: File): Promise<ProcessingResult> {
     try {
       const text = await file.text();
-      const jsonArray = JSON.parse(text);
+      const jsonArray = JSON.parse(text) as TimelineEntry[];
 
       // Process visits
       const visits = Array.from(timelineToVisit(jsonArray));
@@ -39,7 +39,7 @@ export class SchengenFileProcessor {
   public async validateFile(file: File): Promise<boolean> {
     try {
       const text = await file.text();
-      const jsonArray = JSON.parse(text);
+      const jsonArray = JSON.parse(text) as unknown;
       return Array.isArray(jsonArray);
     } catch {
       return false;
@@ -54,8 +54,10 @@ export class SchengenFileProcessor {
     const daysSet = await collectSchengenDays(visits);
     const countries = new Set<string>();
 
-    for (const [_, country] of daysSet) {
-      countries.add(country.name);
+    for (const country of daysSet.values()) {
+      if (typeof country.name === 'string') {
+        countries.add(country.name);
+      }
     }
 
     return {
