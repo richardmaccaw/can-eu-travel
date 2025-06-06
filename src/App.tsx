@@ -1,4 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
 import { timelineToFixes } from './fileHandler'
 import { collectSchengenDays, windowStats } from './schengen'
 import { msToUTCmidnight } from './utils'
@@ -7,6 +9,7 @@ import type { Stats } from './sampleData'
 export default function App() {
   const [stats, setStats] = useState<Stats | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = useCallback(async (file: File) => {
     try {
@@ -29,13 +32,26 @@ export default function App() {
     if (file) handleFile(file)
   }
 
+  const handleUploadClick = () => {
+    fileInputRef.current?.click()
+  }
+
   return (
-    <div style={{ padding: '1rem', fontFamily: 'sans-serif' }}>
-      <h1>Schengen 90/180 Calculator</h1>
-      <input type="file" accept=".json" onChange={onChange} />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="p-4 font-sans space-y-4">
+      <h1 className="text-2xl font-bold">Schengen 90/180 Calculator</h1>
+      <Input
+        ref={fileInputRef}
+        type="file"
+        accept=".json"
+        onChange={onChange}
+        className="hidden"
+      />
+      <Button variant="outline" type="button" onClick={handleUploadClick}>
+        Upload JSON
+      </Button>
+      {error && <p className="text-red-600">{error}</p>}
       {stats && (
-        <div style={{ marginTop: '1rem' }}>
+        <div className="mt-4 space-y-1">
           <p>Days used: {stats.used}</p>
           <p>Days left: {stats.left}</p>
         </div>
