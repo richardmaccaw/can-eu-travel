@@ -10,7 +10,7 @@ export interface SchengenCalendarProps {
 
 interface DayInfo {
   date: Date
-  inSchengen: boolean
+  country?: { name: string; emoji: string }
 }
 
 export function SchengenCalendar({
@@ -30,7 +30,7 @@ export function SchengenCalendar({
     for (let i = 0; i < 180; i++) {
       const ms = startMs + i * 86_400_000
       const date = new Date(ms)
-      arr.push({ date, inSchengen: days.has(ms) })
+      arr.push({ date, country: days.get(ms) })
     }
     return arr
   }, [startMs, days])
@@ -69,12 +69,22 @@ export function SchengenCalendar({
             {week.map((day, dIdx) => (
               <div
                 key={dIdx}
-                title={day.date.toISOString().split("T")[0]}
+                title={
+                  day.country
+                    ? `${day.date.toISOString().split("T")[0]} - ${day.country.name}`
+                    : day.date.toISOString().split("T")[0]
+                }
                 className={cn(
-                  "h-3 w-3 rounded-sm",
-                  day.inSchengen ? "bg-primary" : "bg-muted"
+                  "h-3 w-3 rounded-sm flex items-center justify-center overflow-hidden",
+                  !day.country && "bg-muted"
                 )}
-              />
+              >
+                {day.country && (
+                  <span className="mask-circle text-[10px] leading-none">
+                    {day.country.emoji}
+                  </span>
+                )}
+              </div>
             ))}
           </div>
         ))}

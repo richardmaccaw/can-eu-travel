@@ -118,3 +118,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .mask-circle {
+    -webkit-mask-image: radial-gradient(circle, black 99%, transparent 100%);
+    mask-image: radial-gradient(circle, black 99%, transparent 100%);
+  }
+}

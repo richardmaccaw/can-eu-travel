@@ -4,9 +4,13 @@ import { msToUTCmidnight } from './dateUtils'
 import { parseLatLon } from "./locationUtils";
 import type { FeatureCollection, Feature, Polygon, MultiPolygon } from 'geojson'
 
+export interface CountryInfo {
+    name: string
+    emoji: string
+}
 
-type SchengenFeature = Feature<Polygon | MultiPolygon, Record<string, unknown>>
-type SchengenCollection = FeatureCollection<Polygon | MultiPolygon, Record<string, unknown>>
+type SchengenFeature = Feature<Polygon | MultiPolygon, CountryInfo>
+type SchengenCollection = FeatureCollection<Polygon | MultiPolygon, CountryInfo>
 
 let schengenCache: SchengenCollection | null = null
 
@@ -18,15 +22,15 @@ export async function loadSchengen(): Promise<SchengenCollection> {
     return schengenCache
 }
 
-export async function getSchengenCountry(lat: number, lon: number): Promise<Record<string, unknown> | null> {
+export async function getSchengenCountry(lat: number, lon: number): Promise<CountryInfo | null> {
     const geoJson = await loadSchengen()
     const pt = point([lon, lat])
     const country = geoJson.features.find((c: SchengenFeature) => booleanPointInPolygon(pt, c))
     return country ? country.properties : null
 }
 
-export async function collectSchengenDays(visits: Iterable<Visit>): Promise<Map<number, Record<string, unknown>>> {
-    const days = new Map<number, Record<string, unknown>>()
+export async function collectSchengenDays(visits: Iterable<Visit>): Promise<Map<number, CountryInfo>> {
+    const days = new Map<number, CountryInfo>()
     for (const v of visits) {
         const country = await getSchengenCountry(v.lat, v.lon)
         if (!country) continue
