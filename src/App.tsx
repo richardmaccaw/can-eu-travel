@@ -3,7 +3,7 @@ import { SchengenFileProcessor, type ProcessingResult } from "@/lib/schengen/pro
 import { useCallback, useRef, useState } from "react"
 import { SchengenCalendar } from "@/components/SchengenCalendar"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
-import { Input } from "./components/ui/input"
+import { Input } from "@/components/ui/input"
 import { Story } from "@/components/Story"
 import { ArrowDown } from "lucide-react"
 
