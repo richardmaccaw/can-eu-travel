@@ -1,12 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { SchengenFileProcessor, type ProcessingResult } from "@/lib/schengen/processor"
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react"
+import { SchengenCalendar } from "@/components/SchengenCalendar"
+import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { Input } from "./components/ui/input";
 
 function App() {
   const [data, setData] = useState<ProcessingResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [stats] = useState(sampleStats)
+  const [daysSet] = useState(sampleDaysSet)
 
 
   const handleFile = useCallback(async (file: File) => {
@@ -39,7 +43,7 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
+    <div className="flex min-h-svh flex-col items-center justify-center gap-4 p-4">
       <Button onClick={handleUploadClick}>Click me</Button>
       <Input
         ref={fileInputRef}
@@ -51,11 +55,13 @@ function App() {
       {error && <p className="text-red-600">{error}</p>}
 
       {data && (
-        <div className="mt-4 space-y-1">
+        <div className="space-y-1">
           <p>Days used: {data.stats.used}</p>
           <p>Days left: {data.stats.left}</p>
         </div>
       )}
+
+      <SchengenCalendar stats={stats} daysSet={daysSet} />
     </div>
   )
 }
