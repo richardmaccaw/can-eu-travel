@@ -46,7 +46,7 @@ export default function App() {
         onChange={onChange}
         className="hidden"
       />
-      <Button type="button" onClick={handleUploadClick}>
+      <Button variant="outline" type="button" onClick={handleUploadClick}>
         Upload JSON
       </Button>
       {error && <p className="text-red-600">{error}</p>}
