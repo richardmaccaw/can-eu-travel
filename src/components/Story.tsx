@@ -17,7 +17,7 @@ const paragraphs = [
 
 export function Story() {
   return (
-    <div className="snap-y snap-mandatory">
+    <div>
       {paragraphs.map((p, i) => (
         <section
           key={i}
