@@ -18,8 +18,8 @@ function App() {
   const importButtonRef = useRef<HTMLButtonElement>(null)
   const hideSkip = useIsIntersecting(importButtonRef, { threshold: 0.5 })
 
-  const [stats] = useState(sampleStats)
-  const [daysSet] = useState(sampleDaysSet)
+  const stats = data?.stats ?? sampleStats
+  const daysSet = data?.daysSet ?? sampleDaysSet
 
   const handleFile = useCallback(async (file: File) => {
     try {
