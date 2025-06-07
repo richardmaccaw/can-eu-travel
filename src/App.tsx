@@ -78,7 +78,7 @@ function App() {
 
   return (
 
-    <div className="flex min-h-svh flex-col gap-4 p-4">
+    <div className="flex min-h-svh flex-col gap-4 p-4 snap-y snap-mandatory">
       <Button
         variant="ghost"
         className={cn(
