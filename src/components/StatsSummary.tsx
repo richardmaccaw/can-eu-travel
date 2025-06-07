@@ -1,4 +1,4 @@
-import { ProcessingResult } from '@/lib/schengen/processor'
+import { type ProcessingResult } from '@/lib/schengen/processor'
 
 interface StatsSummaryProps {
   data: ProcessingResult | null
