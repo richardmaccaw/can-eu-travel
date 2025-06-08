@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -14,30 +13,18 @@ import {
 
 interface UploadControlsProps {
   onFile: (file: File) => void
-  importButtonRef?: React.RefObject<HTMLButtonElement>
+  fileInputRef: React.RefObject<HTMLInputElement>
 }
 
-export function UploadControls({ onFile, importButtonRef }: UploadControlsProps) {
-  const fileInputRef = useRef<HTMLInputElement>(null)
+export function UploadControls({ onFile, fileInputRef }: UploadControlsProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) onFile(file)
   }
 
-  const handleUploadClick = () => {
-    fileInputRef.current?.click()
-  }
-
   return (
     <div className="flex flex-col items-center gap-2">
-      <Button
-        ref={importButtonRef}
-        className="mt-10 w-auto pointer-events-auto"
-        onClick={handleUploadClick}
-      >
-        Import
-      </Button>
       <Dialog>
         <DialogTrigger asChild>
           <Button

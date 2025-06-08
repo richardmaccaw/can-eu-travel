@@ -14,11 +14,16 @@ function App() {
   const [data, setData] = useState<ProcessingResult | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const importButtonRef = useRef<HTMLButtonElement>(null)
-  const hideSkip = useIsIntersecting(importButtonRef, { threshold: 0.5 })
+  const uploadLinkRef = useRef<HTMLElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const hideSkip = useIsIntersecting(uploadLinkRef, { threshold: 0.5 })
 
   const stats = data?.stats
   const daysSet = data?.daysSet
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click()
+  }
 
   const handleFile = useCallback(async (file: File) => {
     try {
@@ -36,7 +41,7 @@ function App() {
 
   const smoothScrollTo = useSmoothScrollTo()
   const handleSkipClick = () => {
-    smoothScrollTo(importButtonRef.current)
+    smoothScrollTo(uploadLinkRef.current)
   }
 
   return (
@@ -71,12 +76,16 @@ function App() {
             onFile={(file) => {
               void handleFile(file)
             }}
-            importButtonRef={importButtonRef as React.RefObject<HTMLButtonElement>}
+            fileInputRef={fileInputRef}
+          />
+
+          <StatsSummary
+            stats={stats}
+            onImportClick={handleUploadClick}
+            importRef={uploadLinkRef}
           />
 
           {error && <p className="text-red-600">{error}</p>}
-
-          <StatsSummary stats={stats} />
 
           <SchengenCalendar stats={stats} daysSet={daysSet} />
 
