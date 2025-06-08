@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useSmoothScrollTo } from '@/hooks/useSmoothScrollTo'
 import { SchengenFileProcessor, type ProcessingResult } from '@/lib/schengen/processor'
-import { UploadControls } from '@/components/UploadControls'
 import { StatsSummary } from '@/components/StatsSummary'
 import { useIsIntersecting } from '@/hooks/useIsIntersecting'
 
@@ -14,16 +13,12 @@ function App() {
   const [data, setData] = useState<ProcessingResult | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const uploadLinkRef = useRef<HTMLElement>(null)
+  const uploadLinkRef = useRef<HTMLDivElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const hideSkip = useIsIntersecting(uploadLinkRef, { threshold: 0.5 })
 
   const stats = data?.stats
   const daysSet = data?.daysSet
-
-  const handleUploadClick = () => {
-    fileInputRef.current?.click()
-  }
 
   const handleFile = useCallback(async (file: File) => {
     try {
@@ -69,20 +64,11 @@ function App() {
 
       {/* Main content section */}
       <section className="snap-center">
-        <div className="flex  flex-col gap-4 p-4">
-
-
-          <UploadControls
-            onFile={(file) => {
-              void handleFile(file)
-            }}
-            fileInputRef={fileInputRef}
-          />
-
+        <div className="flex  flex-col gap-4 p-4" ref={uploadLinkRef}>
           <StatsSummary
             stats={stats}
-            onImportClick={handleUploadClick}
-            importRef={uploadLinkRef}
+            onFile={file => { void handleFile(file) }}
+            fileInputRef={fileInputRef}
           />
 
           {error && <p className="text-red-600">{error}</p>}
