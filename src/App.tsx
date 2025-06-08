@@ -41,35 +41,51 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-svh flex-col gap-4 p-4 snap-y snap-mandatory">
-      <Button
-        variant="ghost"
-        className={cn(
-          'sticky top-2 self-end group transition-opacity duration-500',
-          hideSkip && 'opacity-0 pointer-events-none'
-        )}
-        onClick={handleSkipClick}
-      >
-        Skip
-        <ArrowDown className="ml-1 transition-transform duration-300 group-hover:translate-y-1 group-hover:animate-bounce" />
-      </Button>
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
 
-      <Story />
 
-      <UploadControls
-        onFile={(file) => {
-          void handleFile(file)
-        }}
-        importButtonRef={importButtonRef}
-      />
+      {/* Story section */}
+      <section>
 
-      {error && <p className="text-red-600">{error}</p>}
+        <div className="flex justify-end sticky top-2">
+          <Button
+            variant="link"
+            className={cn(
+              'group transition-opacity duration-500',
+              hideSkip && 'opacity-0 pointer-events-none'
+            )}
+            onClick={handleSkipClick}
+          >
+            Skip
+            <ArrowDown className="pr-1 transition-transform duration-300 group-hover:translate-y-1 group-hover:animate-bounce" />
+          </Button>
+        </div>
+        <Story />
+      </section>
 
-      <StatsSummary data={data} />
+      {/* Main content section */}
+      <section className="snap-center">
+        <div className="flex  flex-col gap-4 p-4">
 
-      <SchengenCalendar stats={stats} daysSet={daysSet} />
 
-      <footer className="mt-8 mb-2 text-center text-xs opacity-60">Made in exile by Richard MacCaw</footer>
+          <UploadControls
+            onFile={(file) => {
+              void handleFile(file)
+            }}
+            importButtonRef={importButtonRef as React.RefObject<HTMLButtonElement>}
+          />
+
+          {error && <p className="text-red-600">{error}</p>}
+
+          <StatsSummary data={data} />
+
+          <SchengenCalendar stats={stats} daysSet={daysSet} />
+
+          <footer className="mt-8 mb-2 text-center text-xs opacity-60">
+            Made in exile by Richard MacCaw
+          </footer>
+        </div>
+      </section>
     </div>
   )
 }

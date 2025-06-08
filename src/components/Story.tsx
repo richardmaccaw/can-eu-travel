@@ -17,11 +17,11 @@ const paragraphs = [
 
 export function Story() {
   return (
-    <div>
+    <div className="h-full snap-y snap-mandatory">
       {paragraphs.map((p, i) => (
         <section
           key={i}
-          className="snap-center h-svh flex items-center justify-center px-6"
+          className="h-screen flex items-center justify-center px-6 snap-center"
         >
           <p className="text-balance text-center font-serif text-2xl md:text-4xl">
             {p}
