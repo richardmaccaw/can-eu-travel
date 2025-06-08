@@ -29,11 +29,15 @@ export function ShowMeHowDialog({ disabled }: { disabled?: boolean }) {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>How to export your location history</DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="pt-4">
                         Open your Google Maps application on your phone. Go to{' '}
                         <strong>Settings</strong>, then{' '}
-                        <strong>Timeline</strong>, then choose{' '}
+                        <strong>Your timeline</strong>, then choose{' '}
+                        <strong>Options, Location and privacy settings</strong>, and finally{' '}
                         <strong>Export location history</strong>.
+                        <br />
+                        <br />
+                        <strong>Note:</strong> This will only work if you have location history enabled in your Google Maps settings.
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
