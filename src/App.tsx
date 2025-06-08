@@ -81,7 +81,7 @@ function App() {
           <SchengenCalendar stats={stats} daysSet={daysSet} />
 
           <footer className="mt-8 mb-2 text-center text-xs opacity-60">
-            Made in exile by Richard MacCaw
+            Made in exile by <a href="https://github.com/richardmaccaw/can-eu-travel" target="_blank" rel="noopener noreferrer" className="underline">Richard MacCaw</a>
           </footer>
         </div>
       </section>
