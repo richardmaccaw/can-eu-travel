@@ -2,7 +2,7 @@ import { useMemo, useState } from "react"
 import { cn } from "@/lib/utils"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { msToUTCmidnight } from "@/lib/schengen/dateUtils"
-import { Toggle } from "@/components/ui/toggle"
+import { Switch } from "@/components/ui/switch"
 import type { ProcessingResult } from "@/lib/schengen/processor"
 import type { CountryInfo } from "@/lib/schengen/calculator"
 
@@ -63,13 +63,15 @@ export function SchengenCalendar({
   return (
     <div className="w-full max-w-6xl mx-auto">
       <div className="flex justify-end mb-2">
-        <Toggle
-          pressed={showEmoji}
-          onPressedChange={setShowEmoji}
-          className="pointer-events-auto"
-        >
-          Toggle flags
-        </Toggle>
+        <label className="flex items-center gap-2 cursor-pointer select-none">
+          <Switch
+            defaultChecked
+            checked={showEmoji}
+            onCheckedChange={setShowEmoji}
+            id="toggle-flags"
+          />
+          <span className="text-sm">Show flags</span>
+        </label>
       </div>
       <div className="flex gap-0.5 text-xs mb-1">
         {monthLabels.map((label, idx) => (
