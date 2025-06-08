@@ -12,7 +12,7 @@ const paragraphs = [
   "One more day in the EU. Like some kind of Brexit Cinderella, I had until midnight (the next day) before I turned back into a pumpkin and was catapulted across the North Sea.",
   "That\u2019s when I knew: there had to be a better way.",
   "So I built this calculator.",
-  "It reads your Google Timeline export \u2014 yes, the one quietly tracking everywhere you\u2019ve been since 2012 \u2014 and calculates exactly how many Schengen days you\u2019ve used and how many you\u2019ve got left. No guessing. No calendar spreadsheets. No awkward standoffs in Copenhagen while your wife is halfway to the rental car.",
+  "It reads your Google Timeline export and calculates exactly how many Schengen days you\u2019ve used and how many you\u2019ve got left. No guessing. No calendar spreadsheets. No awkward standoffs in Copenhagen while your wife is halfway to the rental car.",
 ]
 
 export function Story() {

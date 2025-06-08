@@ -29,7 +29,7 @@ export function StatsSummary({ stats, onFile, fileInputRef }: StatsSummaryProps)
             <Button
               onClick={handleImportClick}
               variant="link"
-              className="p-0 text-7xl align-baseline underline hover:opacity-80  "
+              className="p-0 text-7xl align-baseline underline cursor-pointer text-blue-600 dark:text-blue-400 hover:text-blue-800 hover:opacity-80"
             >
               ?
             </Button>{' '} days left
