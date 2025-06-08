@@ -4,12 +4,14 @@ export interface Stats {
   windowStart: number
 }
 
+// Placeholder stats for demo purposes only
 export const sampleStats: Stats = {
-  used: 66,
-  left: 24,
-  windowStart: Date.now() - 179 * 86400000
+  used: 50,
+  left: 50,
+  windowStart: Date.now() - 180 * 86400000 // Placeholder window start
 }
 
+// Placeholder days set for demo purposes only
 export const sampleDaysSet = new Map<number, { name: string; emoji: string }>()
 
 const today = new Date()
@@ -17,12 +19,9 @@ const start = new Date(today)
 start.setDate(start.getDate() - 180)
 
 const countryData: Record<string, { name: string; emoji: string }> = {
-  France: { name: 'France', emoji: '🇫🇷' },
-  Germany: { name: 'Germany', emoji: '🇩🇪' },
-  Italy: { name: 'Italy', emoji: '🇮🇹' },
-  Spain: { name: 'Spain', emoji: '🇪🇸' },
-  Netherlands: { name: 'Netherlands', emoji: '🇳🇱' },
-  Austria: { name: 'Austria', emoji: '🇦🇹' }
+  CountryA: { name: 'Country A', emoji: '🤷' },
+  CountryB: { name: 'Country B', emoji: '🤷' },
+  CountryC: { name: 'Country C', emoji: '🤷' }
 }
 
 function addTrip(startOffset: number, length: number, country: keyof typeof countryData) {
@@ -34,9 +33,6 @@ function addTrip(startOffset: number, length: number, country: keyof typeof coun
   }
 }
 
-addTrip(5, 7, 'France')
-addTrip(30, 3, 'Germany')
-addTrip(60, 8, 'Italy')
-addTrip(100, 2, 'Spain')
-addTrip(140, 5, 'Netherlands')
-addTrip(170, 4, 'Austria')
+addTrip(10, 10, 'CountryA')
+addTrip(50, 5, 'CountryB')
+addTrip(100, 7, 'CountryC')
