@@ -22,7 +22,7 @@ export function StatsSummary({ stats, onFile, fileInputRef }: StatsSummaryProps)
   }
 
   return (
-    <div className="animate-in fade-in space-y-2 text-center pt-50 pb-10 flex flex-col items-center">
+    <div className="animate-in fade-in space-y-2 text-center pb-10 flex flex-col items-center">
       <p className="text-balance font-serif text-7xl">
         {!stats ? (
           <>
