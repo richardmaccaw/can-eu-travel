@@ -92,15 +92,29 @@ export function SchengenCalendar({
                     : day.date.toISOString().split("T")[0]
                 }
                 className={cn(
-                  "aspect-square w-full rounded-sm flex items-center justify-center overflow-hidden",
-                  !day.country && "bg-muted",
-                  day.country && !showEmoji && "bg-foreground"
+                  "aspect-square w-full rounded-sm flex items-center justify-center overflow-hidden relative",
+                  !day.country && "bg-muted"
                 )}
               >
-                {day.country && showEmoji && (
-                  <span className="mask-circle text-2xl leading-none">
+                {/* Emoji */}
+                {day.country && (
+                  <span
+                    className={cn(
+                      "mask-circle text-2xl leading-none absolute inset-0 flex items-center justify-center transition-opacity duration-500",
+                      showEmoji ? "opacity-100" : "opacity-0 pointer-events-none"
+                    )}
+                  >
                     {day.country.emoji}
                   </span>
+                )}
+                {/* Color fill */}
+                {day.country && (
+                  <span
+                    className={cn(
+                      "absolute inset-0 w-full h-full rounded-sm transition-opacity duration-500",
+                      showEmoji ? "opacity-0 pointer-events-none" : "opacity-100 bg-foreground"
+                    )}
+                  />
                 )}
               </div>
             ))}
