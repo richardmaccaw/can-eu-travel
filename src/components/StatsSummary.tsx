@@ -31,7 +31,7 @@ export function StatsSummary({ stats, onFile, fileInputRef }: StatsSummaryProps)
               variant="link"
               className="p-0 text-7xl align-baseline underline hover:opacity-80  "
             >
-              Import data
+              ?
             </Button>{' '} days left
           </>
         ) : left > 0 ? (
