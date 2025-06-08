@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react"
-import { cn } from "@/lib/utils"
 import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { msToUTCmidnight } from "@/lib/schengen/dateUtils"
 import { Switch } from "@/components/ui/switch"
 import type { ProcessingResult } from "@/lib/schengen/processor"
 import type { CountryInfo } from "@/lib/schengen/calculator"
+import { AnimatedDayCell } from "./AnimatedDayCell"
 
 export interface SchengenCalendarProps {
   stats?: ProcessingResult['stats'] | null
@@ -84,39 +84,12 @@ export function SchengenCalendar({
         {weeks.map((week, wIdx) => (
           <div key={wIdx} className="flex flex-1 flex-col gap-2">
             {week.map((day, dIdx) => (
-              <div
+              <AnimatedDayCell
                 key={dIdx}
-                title={
-                  day.country
-                    ? `${day.date.toISOString().split("T")[0]} - ${day.country.name}`
-                    : day.date.toISOString().split("T")[0]
-                }
-                className={cn(
-                  "aspect-square w-full rounded-sm flex items-center justify-center overflow-hidden relative",
-                  !day.country && "bg-muted"
-                )}
-              >
-                {/* Emoji */}
-                {day.country && (
-                  <span
-                    className={cn(
-                      "mask-circle text-2xl leading-none absolute inset-0 flex items-center justify-center transition-opacity duration-500",
-                      showEmoji ? "opacity-100" : "opacity-0 pointer-events-none"
-                    )}
-                  >
-                    {day.country.emoji}
-                  </span>
-                )}
-                {/* Color fill */}
-                {day.country && (
-                  <span
-                    className={cn(
-                      "absolute inset-0 w-full h-full rounded-sm transition-opacity duration-500",
-                      showEmoji ? "opacity-0 pointer-events-none" : "opacity-100 bg-foreground"
-                    )}
-                  />
-                )}
-              </div>
+                country={day.country}
+                date={day.date}
+                showEmoji={showEmoji}
+              />
             ))}
           </div>
         ))}
