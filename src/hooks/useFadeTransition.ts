@@ -18,7 +18,7 @@ export function useFadeTransition<T>(value: T, duration = 500): [T, 'in' | 'out'
         setDisplayedValue(value)
         setFadeState('in')
       }, duration / 2)
-      return () => clearTimeout(timeout)
+      return () => { clearTimeout(timeout); }
     }
   }, [value, displayedValue, duration])
 
