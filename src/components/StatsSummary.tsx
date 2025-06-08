@@ -29,9 +29,9 @@ export function StatsSummary({ stats, onFile, fileInputRef }: StatsSummaryProps)
             <Button
               onClick={handleImportClick}
               variant="link"
-              className="p-0 text-7xl align-baseline underline hover:opacity-80  "
+              className="p-0 text-7xl align-baseline underline hover:opacity-80 hover:cursor-pointer"
             >
-              Import data
+              ?...
             </Button>{' '} days left
           </>
         ) : left > 0 ? (
