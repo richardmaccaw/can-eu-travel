@@ -73,26 +73,31 @@ export function SchengenCalendar({
           <span className="text-sm">Show flags</span>
         </label>
       </div>
-      <div className="flex gap-0.5 text-xs mb-1">
-        {monthLabels.map((label, idx) => (
-          <div key={idx} className="flex-1 h-5 flex items-center justify-center">
-            {label}
-          </div>
-        ))}
-      </div>
-      <div className="flex gap-2">
-        {weeks.map((week, wIdx) => (
-          <div key={wIdx} className="flex flex-1 flex-col gap-2">
-            {week.map((day, dIdx) => (
-              <AnimatedDayCell
-                key={dIdx}
-                country={day.country}
-                date={day.date}
-                showEmoji={showEmoji}
-              />
+
+      <div className="overflow-x-auto -mx-4 px-4">
+        <div className="min-w-[700px] md:min-w-0">
+          <div className="flex gap-0.5 text-xs mb-1">
+            {monthLabels.map((label, idx) => (
+              <div key={idx} className="flex-1 h-5 flex items-center justify-center">
+                {label}
+              </div>
             ))}
           </div>
-        ))}
+          <div className="flex gap-2">
+            {weeks.map((week, wIdx) => (
+              <div key={wIdx} className="flex flex-1 flex-col gap-2">
+                {week.map((day, dIdx) => (
+                  <AnimatedDayCell
+                    key={dIdx}
+                    country={day.country}
+                    date={day.date}
+                    showEmoji={showEmoji}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
