@@ -15,11 +15,9 @@ interface DayInfo {
 }
 
 export function SchengenCalendar({
-  stats: initialStats = sampleStats,
-  daysSet: initialDays = sampleDaysSet,
+  stats = sampleStats,
+  daysSet = sampleDaysSet,
 }: SchengenCalendarProps) {
-  const [stats] = useState(initialStats)
-  const [days] = useState(initialDays)
   const [showEmoji, setShowEmoji] = useState(false)
 
   const startMs = useMemo(
@@ -32,10 +30,10 @@ export function SchengenCalendar({
     for (let i = 0; i < 180; i++) {
       const ms = startMs + i * 86_400_000
       const date = new Date(ms)
-      arr.push({ date, country: days.get(ms) })
+      arr.push({ date, country: daysSet.get(ms) })
     }
     return arr
-  }, [startMs, days])
+  }, [startMs, daysSet])
 
   const weeks = useMemo(() => {
     const w: DayInfo[][] = []
