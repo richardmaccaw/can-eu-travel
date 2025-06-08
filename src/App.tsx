@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useSmoothScrollTo } from '@/hooks/useSmoothScrollTo'
 import { SchengenFileProcessor, type ProcessingResult } from '@/lib/schengen/processor'
-import { UploadControls } from '@/components/UploadControls'
 import { StatsSummary } from '@/components/StatsSummary'
 import { useIsIntersecting } from '@/hooks/useIsIntersecting'
 
@@ -14,8 +13,9 @@ function App() {
   const [data, setData] = useState<ProcessingResult | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const importButtonRef = useRef<HTMLButtonElement>(null)
-  const hideSkip = useIsIntersecting(importButtonRef, { threshold: 0.5 })
+  const uploadLinkRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const hideSkip = useIsIntersecting(uploadLinkRef, { threshold: 0.5 })
 
   const stats = data?.stats
   const daysSet = data?.daysSet
@@ -36,7 +36,7 @@ function App() {
 
   const smoothScrollTo = useSmoothScrollTo()
   const handleSkipClick = () => {
-    smoothScrollTo(importButtonRef.current)
+    smoothScrollTo(uploadLinkRef.current)
   }
 
   return (
@@ -64,19 +64,14 @@ function App() {
 
       {/* Main content section */}
       <section className="snap-center">
-        <div className="flex  flex-col gap-4 p-4">
-
-
-          <UploadControls
-            onFile={(file) => {
-              void handleFile(file)
-            }}
-            importButtonRef={importButtonRef as React.RefObject<HTMLButtonElement>}
+        <div className="flex  flex-col gap-4 p-4" ref={uploadLinkRef}>
+          <StatsSummary
+            stats={stats}
+            onFile={file => { void handleFile(file) }}
+            fileInputRef={fileInputRef}
           />
 
           {error && <p className="text-red-600">{error}</p>}
-
-          <StatsSummary stats={stats} />
 
           <SchengenCalendar stats={stats} daysSet={daysSet} />
 
