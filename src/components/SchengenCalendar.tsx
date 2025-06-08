@@ -1,28 +1,32 @@
 import { useMemo, useState } from "react"
 import { cn } from "@/lib/utils"
-import { sampleDaysSet, sampleStats, type Stats } from "@/fixtures/sampleData"
+import { sampleDaysSet, sampleStats } from "@/fixtures/sampleData"
 import { msToUTCmidnight } from "@/lib/schengen/dateUtils"
 import { Toggle } from "@/components/ui/toggle"
+import type { ProcessingResult } from "@/lib/schengen/processor"
+import type { CountryInfo } from "@/lib/schengen/calculator"
 
 export interface SchengenCalendarProps {
-  stats?: Stats
-  daysSet?: Map<number, { name: string; emoji: string }>
+  stats?: ProcessingResult['stats'] | null
+  daysSet?: Map<number, CountryInfo> | null
 }
 
 interface DayInfo {
   date: Date
-  country?: { name: string; emoji: string }
+  country?: CountryInfo
 }
 
 export function SchengenCalendar({
-  stats = sampleStats,
-  daysSet = sampleDaysSet,
+  stats,
+  daysSet,
 }: SchengenCalendarProps) {
+  const statsToDisplay = stats ?? sampleStats
+  const daysSetToDisplay = daysSet ?? sampleDaysSet
   const [showEmoji, setShowEmoji] = useState(true)
 
   const startMs = useMemo(
-    () => msToUTCmidnight(stats.windowStart),
-    [stats.windowStart]
+    () => msToUTCmidnight(statsToDisplay.windowStart),
+    [statsToDisplay.windowStart]
   )
 
   const dayList: DayInfo[] = useMemo(() => {
@@ -30,10 +34,10 @@ export function SchengenCalendar({
     for (let i = 0; i < 180; i++) {
       const ms = startMs + i * 86_400_000
       const date = new Date(ms)
-      arr.push({ date, country: daysSet.get(ms) })
+      arr.push({ date, country: daysSetToDisplay.get(ms) })
     }
     return arr
-  }, [startMs, daysSet])
+  }, [startMs, daysSetToDisplay])
 
   const weeks = useMemo(() => {
     const w: DayInfo[][] = []

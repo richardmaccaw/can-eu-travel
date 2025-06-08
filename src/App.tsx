@@ -2,7 +2,6 @@ import { useCallback, useRef, useState } from 'react'
 import { ArrowDown } from 'lucide-react'
 import { Story } from '@/components/Story'
 import { SchengenCalendar } from '@/components/SchengenCalendar'
-import { sampleDaysSet, sampleStats } from '@/fixtures/sampleData'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useSmoothScrollTo } from '@/hooks/useSmoothScrollTo'
@@ -18,8 +17,8 @@ function App() {
   const importButtonRef = useRef<HTMLButtonElement>(null)
   const hideSkip = useIsIntersecting(importButtonRef, { threshold: 0.5 })
 
-  const stats = data?.stats ?? sampleStats
-  const daysSet = data?.daysSet ?? sampleDaysSet
+  const stats = data?.stats
+  const daysSet = data?.daysSet
 
   const handleFile = useCallback(async (file: File) => {
     try {

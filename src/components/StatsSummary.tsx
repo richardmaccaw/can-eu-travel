@@ -1,16 +1,18 @@
-import { type Stats } from '@/fixtures/sampleData'
+import { type ProcessingResult } from '@/lib/schengen/processor'
+import { sampleStats } from '@/fixtures/sampleData'
 
 interface StatsSummaryProps {
-  stats: Stats
+  stats?: ProcessingResult['stats'] | null
 }
 
 export function StatsSummary({ stats }: StatsSummaryProps) {
+  const statsToDisplay = stats ?? sampleStats
   return (
     <div className="animate-in fade-in space-y-2 text-center pt-50 pb-10">
       <p className="text-balance font-serif text-7xl font-semibold">
-        {stats.left > 0 ? `${String(stats.left)} days left` : 'No days left'}
+        {statsToDisplay.left > 0 ? `${String(statsToDisplay.left)} days left` : 'No days left'}
       </p>
-      {stats.left <= 0 && (
+      {statsToDisplay.left <= 0 && (
         <p className="text-red-600 text-lg">You have overstayed!</p>
       )}
     </div>
