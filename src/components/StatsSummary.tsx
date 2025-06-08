@@ -6,6 +6,9 @@ interface StatsSummaryProps {
 }
 
 export function StatsSummary({ stats }: StatsSummaryProps) {
+  const left = stats?.left ?? 0
+  const animatedLeft = useCountDown(90, left, 1000)
+
   if (!stats) {
     return (
       <div className="animate-in fade-in space-y-2 text-center pt-50 pb-10">
@@ -13,15 +16,15 @@ export function StatsSummary({ stats }: StatsSummaryProps) {
       </div>
     )
   }
-  const animatedLeft = useCountDown(90, stats.left, 1000)
+
   return (
     <div className="animate-in fade-in space-y-2 text-center pt-50 pb-10">
       <p className="text-balance font-serif text-7xl font-semibold">
-        {stats.left > 0
-          ? `${animatedLeft ?? ''} days left`
+        {left > 0
+          ? String(animatedLeft) + ' days left'
           : 'No days left'}
       </p>
-      {stats.left <= 0 && (
+      {left <= 0 && (
         <p className="text-red-600 text-lg">You have overstayed!</p>
       )}
     </div>
