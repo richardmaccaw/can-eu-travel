@@ -77,7 +77,7 @@ function App() {
 
           {error && <p className="text-red-600">{error}</p>}
 
-          <StatsSummary data={data} />
+          <StatsSummary stats={stats} />
 
           <SchengenCalendar stats={stats} daysSet={daysSet} />
 

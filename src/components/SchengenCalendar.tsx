@@ -18,7 +18,7 @@ export function SchengenCalendar({
   stats = sampleStats,
   daysSet = sampleDaysSet,
 }: SchengenCalendarProps) {
-  const [showEmoji, setShowEmoji] = useState(false)
+  const [showEmoji, setShowEmoji] = useState(true)
 
   const startMs = useMemo(
     () => msToUTCmidnight(stats.windowStart),
